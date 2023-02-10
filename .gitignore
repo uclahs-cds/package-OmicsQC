@@ -110,3 +110,7 @@ work/
 *.txt
 *.tsv
 *.rsav
+
+# R-Files
+000_HEADER.R
+199.QC.Metrics.Heatmap.R
