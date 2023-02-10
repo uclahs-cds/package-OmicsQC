@@ -7,7 +7,7 @@
 .Rapp.history
 .Rproj.user
 *.RData
-*.rd[as]
+# *.rd[as]
 
 # Python
 __pycache__/
@@ -105,3 +105,8 @@ work/
 *.temp
 *.xlk
 *.~vsd*
+
+# Figures and Data
+*.txt
+*.tsv
+*.rsav
