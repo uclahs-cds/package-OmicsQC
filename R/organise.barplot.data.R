@@ -1,4 +1,4 @@
-aggregate.barplot.data <- function(df, filename = NULL) {
+organise.barplot.data <- function(df, filename = NULL) {
 
     barplot.data <- colSums(df);
 
