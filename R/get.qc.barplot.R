@@ -20,6 +20,6 @@ get.qc.barplot <- function(barplot.data, filename = NULL) {
         line.to = 162,
         line.col = 'darkgrey'
         );
-    
+
     return(barplot)
     }
