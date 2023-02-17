@@ -1,4 +1,4 @@
-# ' Calculate z-scores for each metric across each sample
+# ' Sign correct statistical scores and sum across for total sample score
 # '
 # ' This function takes a dataframe of all the negative scores and aggregates
 # ' to a form which can be plotted as a a barplot.
