@@ -1,3 +1,12 @@
+# ' Calculate z-scores for each metric across each sample
+# '
+# ' This function takes a dataframe of all the negative scores and aggregates
+# ' to a form which can be plotted as a a barplot.
+# '
+# ' @param df A dataframe whose rows are samples and each column a QC metric
+# ' @param filename A filename where to save data. If NULL data will not be saved to file
+# ' @return A dataframe of z-scores for each metric
+# ' @export
 organise.barplot.data <- function(df, filename = NULL) {
 
     barplot.data <- colSums(df);
