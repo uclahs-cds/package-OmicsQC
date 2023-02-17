@@ -15,6 +15,6 @@ jobs:
       steps:
          - uses: actions/checkout@v2
            with:
-              path: BoutrosLabTemplate
-         - run: R CMD build --compact-vignettes="gs+qpdf" BoutrosLabTemplate
-         - run: R CMD check --as-cran --run-donttest BoutrosLabTemplate_*.tar.gz
+              path: omicsQC
+         - run: R CMD build --compact-vignettes="gs+qpdf" omicsQC
+         - run: R CMD check --as-cran --run-donttest omicsQC*.tar.gz
