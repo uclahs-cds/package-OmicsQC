@@ -1,6 +1,6 @@
-# Project/Repo Title
+# package-omicsQC
 
-Template Repository for the Boutros Lab general project repos. Describe a simple overview of use/purpose here.
+This is a package for QC of genomic data.
 
 ## Description
 
@@ -8,7 +8,7 @@ An in-depth paragraph about your project and overview of use.
 
 ## License
 
-Author: Name1(username1@mednet.ucla.edu), Name2(username2@mednet.ucla.edu)
+Author: Hugo Anders Frelin(afrelin1@mednet.ucla.edu)
 
 [This project] is licensed under the GNU General Public License version 2. See the file LICENSE.md for the terms of the GNU GPL license.
 
