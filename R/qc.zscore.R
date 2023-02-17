@@ -49,7 +49,7 @@ correct.zscore.signs <- function(df, signs.data, metric.col.name, signs.col.name
         }
 
     df[df > 0] <- 0;
-    
+
     df <- t(df);
 
     if (!is.null(filename)) {

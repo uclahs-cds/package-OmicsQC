@@ -31,8 +31,6 @@ get.qc.barplot <- function(barplot.data, filename = NULL, cutoff = (function(x) 
         line.to = 162,
         line.col = 'darkgrey'
         );
-
-    return(barplot)
     }
 
 # ' Generates the standard heatmap of scores for each sample
@@ -73,7 +71,6 @@ get.qc.heatmap <- function(df, ylabels) {
         row.lwd = 1,
         axes.lwd = 2
         );
-    return(heatmap)
     }
 
 # ' Generates the multipanel plot of heatmap and barplot
