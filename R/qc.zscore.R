@@ -42,7 +42,7 @@ zscores.from.metrics <- function(qc.data, filename = NULL) {
 # ' @return A whose rows are the QC metrics, and columns are samples with the z-scores if they are negative
 # ' @export
 correct.zscore.signs <- function(zscores, signs.data, metric.col.name, signs.col.name, filename = NULL) {
-    neg_z <- signs.data$metric.col.name[which(signs.data$signs.col.name == "neg")];
+    neg_z <- signs[[metric.col.name]][which(signs.data[[signs.col.name]] == "neg")];
 
     for (i in neg_z) {
         zscores[, i] <- -1 * zscores[, i];
