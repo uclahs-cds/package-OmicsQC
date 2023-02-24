@@ -39,13 +39,13 @@ get.qc.barplot <- function(barplot.data, filename = NULL, cutoff = (function(x) 
 # ' after being sign-corrected, and returns the standard heatmap, if filename
 # ' is NULL. If filename is not NULL it saves the heatmap to file and returns NULL
 # '
-# ' @param df A dataframe of sign-corrected scores for each Sample
+# ' @param qc.data.heatmap A dataframe of sign-corrected scores for each Sample
 # ' @param filename A filename to save heatmap. If NULL the heatmap object will be returned
 # ' @return the heatmap or NULL depending if filename is specified
 # ' @export
-get.qc.heatmap <- function(df, ylabels) {
+get.qc.heatmap <- function(qc.data.heatmap, ylabels) {
     heatmap <- BoutrosLab.plotting.general::create.heatmap(
-        df,
+        qc.data.heatmap,
         # Axes labels
         yaxis.lab = ylabels,
         yaxis.cex = 0.8,

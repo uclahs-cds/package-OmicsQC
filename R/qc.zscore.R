@@ -4,19 +4,19 @@
 # ' the z-score across the margin specified. If filename is specified,
 # ' the results will be save to file.
 # '
-# ' @param df A dataframe whose rows are samples and each column a QC metric
+# ' @param qc.data A dataframe whose rows are samples and each column a QC metric
 # ' @param margin An integer specifying across which axis to calculate z-scores
 # ' @param filename A filename where to save data. If NULL data will not be saved to file
 # ' @return A dataframe of z-scores for each metric
 # ' @export
-zscores.from.metrics <- function(df, filename = NULL) {
-    df.zscore <- apply(df, 2, function(x) scale(x, center = TRUE, scale = TRUE));
+zscores.from.metrics <- function(qc.data, filename = NULL) {
+    zscores <- apply(qc.data, 2, function(x) scale(x, center = TRUE, scale = TRUE));
 
-    rownames(df.zscore) <- row.names(df);
+    rownames(zscores) <- row.names(qc.data);
 
     if (!is.null(filename)) {
         write.table(
-            x = df.zscore,
+            x = zscores,
             file = filename,
             quote = FALSE,
             row.names = TRUE,
@@ -24,7 +24,7 @@ zscores.from.metrics <- function(df, filename = NULL) {
             );
         }
 
-    return(df.zscore)
+    return(zscores)
     }
 
 # ' Corrects the z-scores signs according to the metrics
@@ -34,27 +34,27 @@ zscores.from.metrics <- function(df, filename = NULL) {
 # ' is a poor score for every metric. It then sets all positive scores
 # ' to zero, and transposes the dataframe for use in visualisation.
 # '
-# ' @param df A dataframe whose rows are samples and each column a QC metric, entries are z-scores
+# ' @param zscores A dataframe whose rows are samples and each column a QC metric, entries are z-scores
 # ' @param signs.data A dataframe of two columns, the metric names and the sign of the metric
 # ' @param metric.col.name The name of the column in signs.data that stores the metric name
 # ' @param signs.col.name The name of the column in signs.data that stores sign as "neg" or "pos"
 # ' @param filename A filename where to save data. If NULL data will not be saved to file
 # ' @return A whose rows are the QC metrics, and columns are samples with the z-scores if they are negative
 # ' @export
-correct.zscore.signs <- function(df, signs.data, metric.col.name, signs.col.name, filename = NULL) {
+correct.zscore.signs <- function(zscores, signs.data, metric.col.name, signs.col.name, filename = NULL) {
     neg_z <- signs.data$metric.col.name[which(signs.data$signs.col.name == "neg")];
 
     for (i in neg_z) {
-        df[, i] <- -1 * df[, i];
+        zscores[, i] <- -1 * zscores[, i];
         }
 
-    df[df > 0] <- 0;
+    zscores[zscores > 0] <- 0;
 
-    df <- t(df);
+    zscores <- t(zscores);
 
     if (!is.null(filename)) {
         write.table(
-            x = df,
+            x = zscores,
             file = filename,
             quote = FALSE,
             row.names = TRUE,
@@ -62,5 +62,5 @@ correct.zscore.signs <- function(df, signs.data, metric.col.name, signs.col.name
             );
         }
 
-    return(df)
+    return(zscores)
     }
