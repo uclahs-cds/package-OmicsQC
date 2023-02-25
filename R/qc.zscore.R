@@ -10,6 +10,13 @@
 # ' @return A dataframe of z-scores for each metric
 # ' @export
 zscores.from.metrics <- function(qc.data, filename = NULL) {
+
+    qc.data.numeric <- all(apply(qc.data, 2, is.numeric))
+
+    if (!qc.data.numeric) {
+        stop("qc.data is not fully numeric")
+        }
+
     zscores <- apply(qc.data, 2, function(x) scale(x, center = TRUE, scale = TRUE));
 
     rownames(zscores) <- row.names(qc.data);

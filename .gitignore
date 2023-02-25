@@ -115,6 +115,7 @@ work/
 000_HEADER.R
 199.QC.Metrics.Heatmap.R
 test.R
+value.test.R
 
 # Lintr
 .lintr
