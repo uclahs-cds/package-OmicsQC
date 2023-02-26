@@ -9,7 +9,7 @@
 # ' @param cutoff A function to plot the cutoff fot what is deemed a poor sample
 # ' @return the barplot or NULL depending if filename is specified
 # ' @export
-get.qc.barplot <- function(barplot.data, filename = NULL, cutoff = (function(x) {x <- -20})) {
+get.qc.barplot <- function(barplot.data, filename = NULL, cutoff = (function(x) {x <- -20}), ...) {
     barplot <- BoutrosLab.plotting.general::create.barplot(
         filename = filename,
         Sum ~ Sample,
@@ -28,8 +28,9 @@ get.qc.barplot <- function(barplot.data, filename = NULL, cutoff = (function(x) 
         # Lines
         line.func = cutoff,
         line.from = 0,
-        line.to = 162,
-        line.col = 'darkgrey'
+        line.to = nrow(barplot.data),
+        line.col = 'darkgrey',
+        ...
         );
     }
 
@@ -43,7 +44,7 @@ get.qc.barplot <- function(barplot.data, filename = NULL, cutoff = (function(x) 
 # ' @param filename A filename to save heatmap. If NULL the heatmap object will be returned
 # ' @return the heatmap or NULL depending if filename is specified
 # ' @export
-get.qc.heatmap <- function(qc.data.heatmap, ylabels) {
+get.qc.heatmap <- function(qc.data.heatmap, ylabels, ...) {
     heatmap <- BoutrosLab.plotting.general::create.heatmap(
         qc.data.heatmap,
         # Axes labels
@@ -69,7 +70,8 @@ get.qc.heatmap <- function(qc.data.heatmap, ylabels) {
         row.lines = 26.5 - c(6, 12, 18, 22, 24),
         row.colour = "grey",
         row.lwd = 1,
-        axes.lwd = 2
+        axes.lwd = 2,
+        ...
         );
     }
 
@@ -83,7 +85,7 @@ get.qc.heatmap <- function(qc.data.heatmap, ylabels) {
 # ' @param filename A filename to save the multipanel plot
 # ' @return NULL
 # ' @export
-get.qc.multipanelplot <- function(barplot, heatmap, filename) {
+get.qc.multipanelplot <- function(barplot, heatmap, filename, ...) {
     BoutrosLab.plotting.general::create.multipanelplot(
         filename = filename,
         width = 10,
@@ -97,5 +99,6 @@ get.qc.multipanelplot <- function(barplot, heatmap, filename) {
         left.padding = 8,
         main = "QC Summary",
         main.cex = 0,
+        ...
         );
     }
