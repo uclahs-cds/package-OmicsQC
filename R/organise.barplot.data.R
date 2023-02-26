@@ -9,6 +9,12 @@
 # ' @export
 organise.barplot.data <- function(qc.plotting.data, filename = NULL) {
 
+    qc.plot.data.numeric <- all(apply(qc.plotting.data, 2, is.numeric))
+
+    if (!qc.plot.data.numeric) {
+        stop("qc.plotting.data is not fully numeric")
+        }
+
     barplot.data <- colSums(qc.plotting.data);
 
     barplot.df <- data.frame(

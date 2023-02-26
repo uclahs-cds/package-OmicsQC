@@ -51,6 +51,12 @@ zscores.from.metrics <- function(qc.data, filename = NULL) {
 correct.zscore.signs <- function(zscores, signs.data, metric.col.name, signs.col.name, filename = NULL) {
     neg_z <- signs[[metric.col.name]][which(signs.data[[signs.col.name]] == "neg")];
 
+    zscores.numeric <- all(apply(zscores, 2, is.numeric))
+
+    if (!zscores.numeric) {
+        stop("zscores is not fully numeric")
+        }
+
     for (i in neg_z) {
         zscores[, i] <- -1 * zscores[, i];
         }
