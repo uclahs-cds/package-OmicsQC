@@ -7,7 +7,7 @@
 # ' @param filename A filename where to save data. If NULL data will not be saved to file
 # ' @return A dataframe of z-scores for each metric
 # ' @export
-organise.barplot.data <- function(qc.plotting.data, filename = NULL) {
+accumulate.zscores <- function(qc.plotting.data, filename = NULL) {
 
     qc.plot.data.numeric <- all(apply(qc.plotting.data, 2, is.numeric))
 
