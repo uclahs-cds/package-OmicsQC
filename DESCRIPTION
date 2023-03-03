@@ -1,6 +1,6 @@
 Package: omicsQC
 Type: Package
-Title: This is a QC aggregating package for RNA data
+Title: A QC aggregating package for genomic data
 Version: 0.1.0
 Author: Hugo Frelin
 Maintainer: The package maintainer <yourself@somewhere.net>
