@@ -120,3 +120,4 @@ distribution.assesment.R
 
 # Lintr
 .lintr
+inst/doc
