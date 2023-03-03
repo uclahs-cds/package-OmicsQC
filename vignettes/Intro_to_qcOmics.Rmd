@@ -1,5 +1,5 @@
 ---
-title: "Introduction to QComics"
+title: "Introduction to the QComics"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Introduction to QComics}
@@ -18,4 +18,112 @@ knitr::opts_chunk$set(
 library(omicsQC)
 ```
 
-### Welcome to the intro to this package
+## Introduction and background
+This package can be subdivided into two parts, z-score calculation and accumulation and data visualisation.
+
+  
+
+## 1. z-score calculation and accumulation
+
+In order to get a total score for the quality of a sample, this package will calculate the z-score of each test metric for each sample and then accumulate the z-scores for a total quality score.
+
+This package can be used independent of test metrics used. Some common ones include:  
+
+* Uniquely Mapped Percent Input
+* MultiMapped Count IP
+* Percent EK12 IP
+
+  
+
+### 1.1 Calculating z-scores: zscores.from.metrics()
+
+This function takes the dataframe containing the sample metrics and calculates the z-score for each metric and sample. Each row of qc.data should correspond to a sample, and each column to a test metric. qc.data should be formatted as the table below:
+
+
+| (row) | Uniquely.Mapped.Percent.Input | MultiMapped.Count.IP | Percent.EK12.IP |
+|------:|:-----|---------|:------:|
+| Sample 1 | 50 | 450000 | 19 |
+| Sample 2 | 30 | 900000 | 12 |
+| Sample 3 | 40 | 370000 | 25 |
+
+
+The code block below displays how the function would be run.
+
+```{zscores.from.metrics}
+zscores <- zscores.from.metrics(qc.data, filename = NULL)
+```
+
+The function returns zscores, which is a dataframe containing the z-scores for each sample and test metric. It would resemble the table below.
+
+| (row) | Uniquely.Mapped.Percent.Input | MultiMapped.Count.IP | Percent.EK12.IP |
+|------:|:-----|---------|:------:|
+| Sample 1 | -0.45 | 0.45 | 0.45 |
+| Sample 2 | 0.45 | -0.45 | 0.45 |
+| Sample 3 | 0.45 | 0.45 | 0.45 |
+
+
+### 1.2 Adjusting the z-score signs: correct.zscore.signs()
+This package is designed to be independent of test metrics used, but since some test metrics are better if they are larger and some are better if they are smaller the sign of a poor z-score will differ between the metrics. We must therefore adjust the metrics such that negative z-scores is considered a bad measurement across all tests. This is done by providing a dataframe that states which if positive or negative z-score is good for each metric. It should be of the same format as the table below:
+
+| (row) | Metric | Sign |
+|------:|:-----|---------|
+| 1 | Uniquely.Mapped.Percent.Input | pos |
+| 2 | MultiMapped.Count.IP | pos |
+| 3 | Percent.EK12.IP | neg |
+ 
+The function also sets all non-negative z-scores to zero to make sure positive and negative values do not cancel each other out when we calculate an accumulated score. The dataframe is also transposed for later data visualisation.
+
+Apart from the table above, signs.data, and the dataframe containing our zscores the function also takes the names of the columns containing the metric name and the sign instructions. The function is run as below:
+
+```{correct.zscore.signs}
+zscores.corrected <- correct.zscore.signs(zscores, signs.data, 'Metric', 'Sign')
+```
+zscores.corrected should now resemble the table below, and only contains poor z-scores.
+
+| (row) | Sample 1 | Sample 2 | Sample 3 |
+|------:|:-----|---------|:------:|
+| Uniquely.Mapped.Percent.Input | -0.45 | 0 | 0 |
+| MultiMapped.Count.IP | 0 | -0.45 | 0 |
+| Percent.EK12.IP | -0.45 | -0.45 | -0.45 |
+
+zscores.corrected is a dataframe which can be used to calculate accumulated scores for each sample.
+
+### 1.3 Calculating total score: accumulate.zscores()
+accumulate.zscores takes the zscores.corrected dataframe and calculates the total accumulated quality score for each sample. It does this by summing over all negative z-scores. It then orders the data by quality score size and returns it.
+
+```{accumulate.zscores}
+quality.scores <- accumulate.zscores(zscores.corrected)
+```
+
+quality.scores will be of the same format as the table below.
+
+| (row) | Sample | Sum |
+|------:|:-----|---------|
+| Sample 1 | Sample 1 | -0.9 |
+| Sample 2| Sample 2 | -0.9 |
+| Sample 3 | Sample 3 | -0.45 |
+
+
+## 2. Data visualisation
+The second aspect of the package is the standard visualisation of the QC data. This is implemented using the package BoutrosLab.plotting.general. These functions offer standardised, hard-code plots to simplify the data visualisation, however one can also implement the plots themselves for more customisability.
+
+### 2.1 Quality Score Barplot: get.qc.barplot()
+This function takes the accumulated quality scores and returns a barplot ranging from lowest to highest. It also plots a cut-off for what the accepted lowest score is. If filename is not NULL, it is saved to file, else the trellis object is returned.
+
+```{get.qc.barplot}
+qc.barplot <- get.qc.barplot(quality.scores)
+```
+
+### 2.2 Z-Score Heatmap: get.qc.heatmap()
+This function takes the dataframe witht the z-scores for each sample and metric as well as vector of labels for the y-axis. The labels should be the full names of the metrics in the same order as they are in the dataframe. The function returns a standardised heatmap. If filename is not NULL, it is saved to file, else the trellis object is returned.
+
+``` {get.qc.heatmap}
+qc.heatmap <- get.qc.heatmap(zscores, ylabels)
+```
+
+### 2.3 Aggregating the plots: get.qc.multipanelplot()
+Now that both the heat map and bar plot has been generated they can be aggregated to a multi panel plot. get.qc.multipanelplot() takes the bar plot, heat map and a filename and concatenates the plots in a standardised format and saves  the multi panel plot to file. 
+
+``` {get.qc.multipanelplot}
+get.qc.multipanelplot(barplot, heatmap, 'qc_multipanelplot.pdf')
+```
