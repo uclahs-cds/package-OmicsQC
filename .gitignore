@@ -121,3 +121,7 @@ distribution.assesment.R
 # Lintr
 .lintr
 inst/doc
+
+# Documentation
+docs
+*.Rproj
