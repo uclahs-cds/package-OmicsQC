@@ -9,10 +9,10 @@
 #' @export
 zscores.from.metrics <- function(qc.data, filename = NULL) {
 
-    qc.data.numeric <- all(apply(qc.data, 2, is.numeric))
+    qc.data.numeric <- all(apply(qc.data, 2, is.numeric));
 
     if (!qc.data.numeric) {
-        stop("qc.data is not fully numeric")
+        stop("qc.data is not fully numeric");
         }
 
     zscores <- apply(qc.data, 2, function(x) scale(x, center = TRUE, scale = TRUE));
@@ -29,7 +29,7 @@ zscores.from.metrics <- function(qc.data, filename = NULL) {
             );
         }
 
-    return(zscores)
+    return(zscores);
     }
 
 #' Corrects the z-scores signs according to the metrics
@@ -49,10 +49,10 @@ zscores.from.metrics <- function(qc.data, filename = NULL) {
 correct.zscore.signs <- function(zscores, signs.data, metric.col.name, signs.col.name, filename = NULL) {
     neg_z <- signs.data[[metric.col.name]][which(signs.data[[signs.col.name]] == "neg")];
 
-    zscores.numeric <- all(apply(zscores, 2, is.numeric))
+    zscores.numeric <- all(apply(zscores, 2, is.numeric));
 
     if (!zscores.numeric) {
-        stop("zscores is not fully numeric")
+        stop("zscores is not fully numeric");
         }
 
     for (i in neg_z) {
@@ -73,7 +73,7 @@ correct.zscore.signs <- function(zscores, signs.data, metric.col.name, signs.col
             );
         }
 
-    return(zscores)
+    return(zscores);
     }
 
 #' Sign correct statistical scores and sum across for total sample score
@@ -87,10 +87,10 @@ correct.zscore.signs <- function(zscores, signs.data, metric.col.name, signs.col
 #' @export
 accumulate.zscores <- function(qc.plotting.data, filename = NULL) {
 
-    qc.plot.data.numeric <- all(apply(qc.plotting.data, 2, is.numeric))
+    qc.plot.data.numeric <- all(apply(qc.plotting.data, 2, is.numeric));
 
     if (!qc.plot.data.numeric) {
-        stop("qc.plotting.data is not fully numeric")
+        stop("qc.plotting.data is not fully numeric");
         }
 
     barplot.data <- colSums(qc.plotting.data);
@@ -118,5 +118,5 @@ accumulate.zscores <- function(qc.plotting.data, filename = NULL) {
             );
         }
 
-    return(barplot.df)
+    return(barplot.df);
     }
