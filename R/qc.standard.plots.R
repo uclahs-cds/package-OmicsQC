@@ -20,11 +20,11 @@ get.qc.barplot <- function(barplot.data, filename = NULL, cutoff = (function(x) 
         xaxis.cex = 0,
         yaxis.tck = 0,
         xaxis.tck = 0,
-        xlab.label = "",
-        ylab.label = "Sum of Z (Z < 0)",
+        xlab.label = '',
+        ylab.label = 'Sum of Z (Z < 0)',
         ylab.cex = 1,
         axes.lwd = 2,
-        border.col = "black",
+        border.col = 'black',
         # Lines
         line.func = cutoff,
         line.from = 0,
@@ -55,11 +55,11 @@ get.qc.heatmap <- function(qc.data.heatmap, ylabels, ...) {
         xaxis.cex = 0, # 0.8,
         yaxis.tck = 0,
         xlab.cex = 1,
-        xlab.label = "Samples",
+        xlab.label = 'Samples',
         # Clustering
-        clustering.method = "none",
+        clustering.method = 'none',
         # Colour scheme
-        colour.scheme = c("red", "white"),
+        colour.scheme = c('red', 'white'),
         colour.centering.value = 0,
         colourkey.labels.at = c(-10:0),
         colourkey.cex = 1,
@@ -68,7 +68,7 @@ get.qc.heatmap <- function(qc.data.heatmap, ylabels, ...) {
         # Grid Rows
         grid.row = TRUE,
         row.lines = 26.5 - c(6, 12, 18, 22, 24),
-        row.colour = "grey",
+        row.colour = 'grey',
         row.lwd = 1,
         axes.lwd = 2,
         ...
@@ -97,7 +97,7 @@ get.qc.multipanelplot <- function(barplot, heatmap, filename, ...) {
         y.spacing = -1,
         ylab.axis.padding = -19,
         left.padding = 8,
-        main = "QC Summary",
+        main = 'QC Summary',
         main.cex = 0,
         ...
         );

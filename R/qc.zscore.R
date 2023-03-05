@@ -12,7 +12,7 @@ zscores.from.metrics <- function(qc.data, filename = NULL) {
     qc.data.numeric <- all(apply(qc.data, 2, is.numeric));
 
     if (!qc.data.numeric) {
-        stop("qc.data is not fully numeric");
+        stop('qc.data is not fully numeric');
         }
 
     zscores <- apply(qc.data, 2, function(x) scale(x, center = TRUE, scale = TRUE));
@@ -42,24 +42,24 @@ zscores.from.metrics <- function(qc.data, filename = NULL) {
 #' @param zscores A dataframe whose rows are samples and each column a QC metric, entries are z-scores
 #' @param signs.data A dataframe of two columns, the metric names and the sign of the metric
 #' @param metric.col.name The name of the column in signs.data that stores the metric name
-#' @param signs.col.name The name of the column in signs.data that stores sign as "neg" or "pos"
+#' @param signs.col.name The name of the column in signs.data that stores sign as 'neg' or 'pos'
 #' @param filename A filename where to save data. If NULL data will not be saved to file
 #' @return A dataframe whose rows are the QC metrics, and columns are samples with the z-scores if they are negative
 #' @export
 correct.zscore.signs <- function(zscores, signs.data, metric.col.name, signs.col.name, filename = NULL) {
-    neg_z <- signs.data[[metric.col.name]][which(signs.data[[signs.col.name]] == "neg")];
+    negative.zscores <- signs.data[[metric.col.name]]['neg' == signs.data[[signs.col.name]]];
 
     zscores.numeric <- all(apply(zscores, 2, is.numeric));
 
     if (!zscores.numeric) {
-        stop("zscores is not fully numeric");
+        stop('zscores is not fully numeric');
         }
 
-    for (i in neg_z) {
+    for (i in negative.zscores) {
         zscores[, i] <- -1 * zscores[, i];
         }
 
-    zscores[zscores > 0] <- 0;
+    zscores[0 < zscores] <- 0;
 
     zscores <- t(zscores);
 
@@ -90,14 +90,14 @@ accumulate.zscores <- function(qc.plotting.data, filename = NULL) {
     qc.plot.data.numeric <- all(apply(qc.plotting.data, 2, is.numeric));
 
     if (!qc.plot.data.numeric) {
-        stop("qc.plotting.data is not fully numeric");
+        stop('qc.plotting.data is not fully numeric');
         }
 
     barplot.data <- colSums(qc.plotting.data);
 
     barplot.df <- data.frame(
-        "Sample" = names(barplot.data),
-        "Sum" = barplot.data,
+        'Sample' = names(barplot.data),
+        'Sum' = barplot.data,
         stringsAsFactors = FALSE
         );
 
