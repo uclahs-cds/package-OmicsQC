@@ -91,7 +91,6 @@ work/
 *.gif
 
 # Document file
-*.pdf
 *.rtf
 *.doc
 *.docx
@@ -126,3 +125,7 @@ inst/doc
 # Documentation
 docs
 *.Rproj
+
+# Plots and images
+test_figures/
+distribution_figures/
