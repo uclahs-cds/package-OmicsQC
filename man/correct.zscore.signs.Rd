@@ -7,8 +7,8 @@
 correct.zscore.signs(
   zscores,
   signs.data,
-  metric.col.name,
-  signs.col.name,
+  metric.col.name = "Metric",
+  signs.col.name = "Sign",
   filename = NULL
 )
 }
@@ -19,7 +19,7 @@ correct.zscore.signs(
 
 \item{metric.col.name}{The name of the column in signs.data that stores the metric name}
 
-\item{signs.col.name}{The name of the column in signs.data that stores sign as "neg" or "pos"}
+\item{signs.col.name}{The name of the column in signs.data that stores sign as 'neg' or 'pos'}
 
 \item{filename}{A filename where to save data. If NULL data will not be saved to file}
 }

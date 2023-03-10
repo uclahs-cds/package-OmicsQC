@@ -15,6 +15,6 @@ zscores.from.metrics(qc.data, filename = NULL)
 A dataframe of z-scores for each metric
 }
 \description{
-This function takes a dataframe of QC metrics, anc calculcates the
+This function takes a dataframe of QC metrics, and calculcates the
 the z-score. If filename is specified, the results will be save to file.
 }

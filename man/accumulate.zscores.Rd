@@ -2,12 +2,12 @@
 % Please edit documentation in R/qc.zscore.R
 \name{accumulate.zscores}
 \alias{accumulate.zscores}
-\title{Sign correct statistical scores and sum across for total sample score}
+\title{Sum across sign corrected z-scores for total sample score}
 \usage{
-accumulate.zscores(qc.plotting.data, filename = NULL)
+accumulate.zscores(zscores.corrected, filename = NULL)
 }
 \arguments{
-\item{qc.plotting.data}{A dataframe whose rows are samples and each column a QC metric}
+\item{zscores.corrected}{A dataframe whose rows are samples and each column a QC metric}
 
 \item{filename}{A filename where to save data. If NULL data will not be saved to file}
 }

@@ -2,20 +2,76 @@
 % Please edit documentation in R/qc.standard.plots.R
 \name{get.qc.heatmap}
 \alias{get.qc.heatmap}
-\title{Generates the standard heatmap of scores for each sample}
+\title{Generates the standard heatmap of scores for each sample.}
 \usage{
-get.qc.heatmap(qc.data.heatmap, ylabels, ...)
+get.qc.heatmap(
+  zscores,
+  ylabels,
+  filename = NULL,
+  yaxis.cex = 0.8,
+  xlab.cex = 1,
+  xlab.label = "Samples",
+  clustering.method = "none",
+  colour.scheme = c("red", "white"),
+  colour.centering.value = 0,
+  colourkey.labels.at = c(-10:0),
+  colourkey.cex = 1,
+  at = seq(0, -10, -2),
+  same.as.matrix = TRUE,
+  row.lines = seq(1, ncol(zscores), 1) + 0.5,
+  grid.row = TRUE,
+  row.colour = "black",
+  row.lwd = 1,
+  axes.lwd = 1,
+  ...
+)
 }
 \arguments{
-\item{qc.data.heatmap}{A dataframe of sign-corrected scores for each Sample}
+\item{zscores}{A dataframe of sign-corrected z-scores for each sample and test metric}
 
-\item{filename}{A filename to save heatmap. If NULL the heatmap object will be returned}
+\item{ylabels}{A vector of metric labels for the y-axis}
+
+\item{filename}{Filename for tiff output, or if NULL returns the trellis object itself}
+
+\item{yaxis.cex}{Size of y-axis tick labels, defaults to 0.8}
+
+\item{xlab.cex}{Size of x-axis label, defaults to 1}
+
+\item{xlab.label}{The label for the x-axis, defaults so 'Sample'}
+
+\item{clustering.method}{Method used to cluster the records -- \dQuote{none} gives unclustered data. Accepts all agglomerative clustering methods available in hclust, plus \dQuote{diana} (which is divisive).}
+
+\item{colour.scheme}{Heatmap colouring. Accepts old-style themes, or a vector of either two or three colours that are gradiated to create the final palette.}
+
+\item{colour.centering.value}{What should be the center of the colour-map}
+
+\item{colourkey.labels.at}{A vector specifying the tick-positions on the colourkey}
+
+\item{colourkey.cex}{Size of colourkey label text}
+
+\item{at}{A vector specifying the breakpoints along the range of x; each interval specified by these breakpoints are assigned to a colour from the palette. Defaults to seq(0, -10, -2), to give a clear discrete display of colours. If x has values outside of the range specified by “at” those values are shown with the colours corresponding to the extreme ends of the colour spectrum and a warning is given.}
+
+\item{same.as.matrix}{Prevents the flipping of the matrix that the function normally does}
+
+\item{row.lines}{Vector specifying location of lines, default is seq(1, ncol(x), 1) + 0.5. Note: Add 0.5 to customized vector}
+
+\item{grid.row}{Allow turning off of the interior grid-lines. Default is TRUE.}
+
+\item{row.colour}{Interior grid-line colour, defaults to \dQuote{black}. Can be a vector}
+
+\item{row.lwd}{Interior grid-line width, defaults to 1. Setting to zero is equivalent to grid.row = FALSE and grid.col = FALSE.  Can be a vector.}
+
+\item{axes.lwd}{Width of heatmap border. Note it also changes the colourkey border and ticks}
+
+\item{...}{The function can also take any parameter that BoutrosLab.plotting.general::create.heatmap takes}
 }
 \value{
-the heatmap or NULL depending if filename is specified
+The heatmap or NULL depending if filename is specified
 }
 \description{
 This function takes the the scores for each sample and each metric,
 after being sign-corrected, and returns the standard heatmap, if filename
-is NULL. If filename is not NULL it saves the heatmap to file and returns NULL
+is NULL. If filename is not NULL it saves the heatmap to file and returns NULL.
+get.qc.heatmap offers a standard template for generating a QC heatmap, but can also take any parameter
+that BoutrosLab.plotting.general::create.barplot takes for customisability.
 }
