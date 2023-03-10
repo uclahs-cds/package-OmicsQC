@@ -1,6 +1,6 @@
 #' Calculate z-scores for each metric across each sample
 #'
-#' This function takes a dataframe of QC metrics, anc calculcates the
+#' This function takes a dataframe of QC metrics, and calculcates the
 #' the z-score. If filename is specified, the results will be save to file.
 #'
 #' @param qc.data A dataframe whose rows are samples and each column a QC metric
@@ -9,11 +9,7 @@
 #' @export
 zscores.from.metrics <- function(qc.data, filename = NULL) {
 
-    qc.data.numeric <- all(apply(qc.data, 2, is.numeric));
-
-    if (!qc.data.numeric) {
-        stop('qc.data is not fully numeric');
-        }
+    numeric.df.check(qc.data);
 
     zscores <- apply(qc.data, 2, function(x) scale(x, center = TRUE, scale = TRUE));
 
@@ -46,14 +42,17 @@ zscores.from.metrics <- function(qc.data, filename = NULL) {
 #' @param filename A filename where to save data. If NULL data will not be saved to file
 #' @return A dataframe whose rows are the QC metrics, and columns are samples with the z-scores if they are negative
 #' @export
-correct.zscore.signs <- function(zscores, signs.data, metric.col.name, signs.col.name, filename = NULL) {
+correct.zscore.signs <- function(
+    zscores,
+    signs.data,
+    metric.col.name = 'Metric',
+    signs.col.name = 'Sign',
+    filename = NULL
+    ) {
+
+    numeric.df.check(zscores);
+
     negative.zscores <- signs.data[[metric.col.name]]['neg' == signs.data[[signs.col.name]]];
-
-    zscores.numeric <- all(apply(zscores, 2, is.numeric));
-
-    if (!zscores.numeric) {
-        stop('zscores is not fully numeric');
-        }
 
     for (i in negative.zscores) {
         zscores[, i] <- -1 * zscores[, i];
@@ -76,41 +75,37 @@ correct.zscore.signs <- function(zscores, signs.data, metric.col.name, signs.col
     return(zscores);
     }
 
-#' Sign correct statistical scores and sum across for total sample score
+#' Sum across sign corrected z-scores for total sample score
 #'
 #' This function takes a dataframe of all the negative scores and aggregates
 #' to a form which can be plotted as a a barplot.
 #'
-#' @param qc.plotting.data A dataframe whose rows are samples and each column a QC metric
+#' @param zscores.corrected A dataframe whose rows are samples and each column a QC metric
 #' @param filename A filename where to save data. If NULL data will not be saved to file
 #' @return A dataframe of z-scores for each metric
 #' @export
-accumulate.zscores <- function(qc.plotting.data, filename = NULL) {
+accumulate.zscores <- function(zscores.corrected, filename = NULL) {
 
-    qc.plot.data.numeric <- all(apply(qc.plotting.data, 2, is.numeric));
+    numeric.df.check(zscores.corrected);
 
-    if (!qc.plot.data.numeric) {
-        stop('qc.plotting.data is not fully numeric');
-        }
+    quality.scores <- colSums(zscores.corrected);
 
-    barplot.data <- colSums(qc.plotting.data);
-
-    barplot.df <- data.frame(
-        'Sample' = names(barplot.data),
-        'Sum' = barplot.data,
+    quality.scores.df <- data.frame(
+        'Sample' = names(quality.scores),
+        'Sum' = quality.scores,
         stringsAsFactors = FALSE
         );
 
-    barplot.df <- barplot.df[order(-barplot.df$Sum), ];
+    quality.scores.df <- quality.scores.df[order(-quality.scores.df$Sum), ];
 
-    barplot.df$Sample <- factor(
-        x = barplot.df$Sample,
-        levels = barplot.df$Sample
+    quality.scores.df$Sample <- factor(
+        x = quality.scores.df$Sample,
+        levels = quality.scores.df$Sample
         );
 
     if (!is.null(filename)) {
         write.table(
-            x = qc.plotting.data,
+            x = zscores.corrected,
             file = filename,
             quote = FALSE,
             row.names = TRUE,
@@ -118,5 +113,21 @@ accumulate.zscores <- function(qc.plotting.data, filename = NULL) {
             );
         }
 
-    return(barplot.df);
+    return(quality.scores.df);
+    }
+
+
+#' Test if a dataframe is fully numeric. Raises and error if the dataframe is not.
+#'
+#' @param dataframe The dataframe one wants to test
+#' @noRd
+numeric.df.check <- function(dataframe) {
+
+    dataframe.numeric <- all(apply(dataframe, 2, is.numeric));
+
+    if (!dataframe.numeric) {
+        stop('dataframe is not fully numeric');
+        }
+
+    return(NULL)
     }
