@@ -28,7 +28,7 @@ A dataframe whose rows are the QC metrics, and columns are samples with the z-sc
 }
 \description{
 For some metrics a high z-score is good, while for others a low
-one is good. This functions corrects for that so that negative
+one is good. This functions corrects for that so that a negative z-score
 is a poor score for every metric. It then sets all positive scores
 to zero, and transposes the dataframe for use in visualisation.
 }

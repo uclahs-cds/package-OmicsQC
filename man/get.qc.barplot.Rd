@@ -28,7 +28,7 @@ get.qc.barplot(
 
 \item{filename}{Filename for tiff output, or if NULL returns the trellis object itself}
 
-\item{cutoff}{A function to plot the cutoff fot what is deemed a poor sample}
+\item{cutoff}{A function to plot the cutoff for what is deemed a poor sample quality score}
 
 \item{yaxis.cex}{Size of y-axis tick labels, defaults to 0.8}
 
@@ -61,5 +61,5 @@ and returns the barplot if no filename is specified. If filename is
 is specified it saves the plot as file and returns NULL. It will also draw a
 cut-off for which samples to exclude. get.qc.barplot offers a standard template for generating
 a QC barplot, but can also take any parameter that BoutrosLab.plotting.general::create.barplot
-takes for customisability.
+takes for more customizability.
 }

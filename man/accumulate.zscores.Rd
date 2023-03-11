@@ -2,7 +2,7 @@
 % Please edit documentation in R/qc.zscore.R
 \name{accumulate.zscores}
 \alias{accumulate.zscores}
-\title{Sum across sign corrected z-scores for total sample score}
+\title{Sum across sign corrected z-scores for total sample quality score}
 \usage{
 accumulate.zscores(zscores.corrected, filename = NULL)
 }
@@ -15,6 +15,6 @@ accumulate.zscores(zscores.corrected, filename = NULL)
 A dataframe of z-scores for each metric
 }
 \description{
-This function takes a dataframe of all the negative scores and aggregates
-to a form which can be plotted as a a barplot.
+This function takes a dataframe of all the sign corrected scores, thus all negative, and aggregates
+to get a total sample quality score.
 }
