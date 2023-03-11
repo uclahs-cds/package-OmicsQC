@@ -29,7 +29,11 @@ library(dplyr)
 ```
 
 ## Introduction and background
-This package can be subdivided into two parts, z-score calculation and accumulation, and data visualization. This vignette uses the data that the package comes with, but only displays the head, the first 6 rows, of each dataframe in consideration of space.
+This package can be subdivided into two parts, quality score calculation, and data visualization. The flowchart below displays how these parts interact, and the flow of data throughout the package. This vignette uses the data that the package comes with, but only displays the head, the first 6 rows, of each dataframe in consideration of space. 
+
+```{r, echo=FALSE, out.width="80%", fig.cap="Flowchart of omicsQC"}
+knitr::include_graphics("figures/omicsQCFlowchart.jpeg")
+```
 
 ## 1. z-score calculation and accumulation
 In order to get a total score for the quality of a sample, this package will calculate the z-score of each test metric for each sample and then accumulate the z-scores for a total quality score. This package can be used independent of test metrics used. 

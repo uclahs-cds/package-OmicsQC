@@ -83,7 +83,6 @@ work/
 *.bz2
 
 # Image file
-*.jpeg
 *.jpg
 *.png
 *.tif
