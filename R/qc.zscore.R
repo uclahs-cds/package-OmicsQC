@@ -129,5 +129,5 @@ numeric.df.check <- function(dataframe) {
         stop('dataframe is not fully numeric');
         }
 
-    return(NULL)
+    return(NULL);
     }
