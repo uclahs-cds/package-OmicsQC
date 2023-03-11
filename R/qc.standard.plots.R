@@ -5,10 +5,10 @@
 #' is specified it saves the plot as file and returns NULL. It will also draw a
 #' cut-off for which samples to exclude. get.qc.barplot offers a standard template for generating
 #' a QC barplot, but can also take any parameter that BoutrosLab.plotting.general::create.barplot
-#' takes for customisability.
+#' takes for more customizability.
 #'
 #' @param quality.scores A dataframe with columns 'Sum' (of scores) and 'Sample'
-#' @param cutoff A function to plot the cutoff fot what is deemed a poor sample
+#' @param cutoff A function to plot the cutoff for what is deemed a poor sample quality score
 #' @param yaxis.cex Size of y-axis tick labels, defaults to 0.8
 #' @param xaxis.cex Size of x-axis tick labels, defaults to 0
 #' @param xaxis.tck	Specifies the length of the tick marks for x-axis, defaults to 0
@@ -87,10 +87,6 @@ get.qc.heatmap <- function(
     ylabels,
     filename = NULL,
     yaxis.cex = 0.8,
-    # xaxis.rot = 0,
-    # xaxis.lab = colnames(df),
-    # xaxis.cex = 0, # 0.8,
-    # yaxis.tck = 1,
     xlab.cex = 1,
     xlab.label = 'Samples',
     clustering.method = 'none',
@@ -113,10 +109,6 @@ get.qc.heatmap <- function(
         # Axes labels
         yaxis.lab = ylabels,
         yaxis.cex = yaxis.cex,
-        # xaxis.rot = xaxis.rot,
-        # xaxis.lab = xaxis.lab,
-        # xaxis.cex = xaxis.cex,
-        # yaxis.tck = yaxis.tck,
         xlab.cex = xlab.cex,
         xlab.label = xlab.label,
         # Clustering

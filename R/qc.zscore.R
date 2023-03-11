@@ -1,7 +1,7 @@
 #' Calculate z-scores for each metric across each sample
 #'
 #' This function takes a dataframe of QC metrics, and calculcates the
-#' the z-score. If filename is specified, the results will be save to file.
+#' the z-scores. If filename is specified, the results will be save to file.
 #'
 #' @param qc.data A dataframe whose rows are samples and each column a QC metric
 #' @param filename A filename where to save data. If NULL data will not be saved to file
@@ -31,7 +31,7 @@ zscores.from.metrics <- function(qc.data, filename = NULL) {
 #' Corrects the z-scores signs according to the metrics
 #'
 #' For some metrics a high z-score is good, while for others a low
-#' one is good. This functions corrects for that so that negative
+#' one is good. This functions corrects for that so that a negative z-score
 #' is a poor score for every metric. It then sets all positive scores
 #' to zero, and transposes the dataframe for use in visualisation.
 #'
@@ -75,10 +75,10 @@ correct.zscore.signs <- function(
     return(zscores);
     }
 
-#' Sum across sign corrected z-scores for total sample score
+#' Sum across sign corrected z-scores for total sample quality score
 #'
-#' This function takes a dataframe of all the negative scores and aggregates
-#' to a form which can be plotted as a a barplot.
+#' This function takes a dataframe of all the sign corrected scores, thus all negative, and aggregates
+#' to get a total sample quality score.
 #'
 #' @param zscores.corrected A dataframe whose rows are samples and each column a QC metric
 #' @param filename A filename where to save data. If NULL data will not be saved to file
