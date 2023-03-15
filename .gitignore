@@ -7,7 +7,7 @@
 .Rapp.history
 .Rproj.user
 *.RData
-*.rd[as]
+# *.rd[as]
 
 # Python
 __pycache__/
@@ -83,7 +83,6 @@ work/
 *.bz2
 
 # Image file
-*.jpeg
 *.jpg
 *.png
 *.tif
@@ -91,7 +90,6 @@ work/
 *.gif
 
 # Document file
-*.pdf
 *.rtf
 *.doc
 *.docx
@@ -105,3 +103,28 @@ work/
 *.temp
 *.xlk
 *.~vsd*
+
+# Data
+*.txt
+*.tsv
+*.rsav
+
+# Temporary R-Files
+000_HEADER.R
+199.QC.Metrics.Heatmap.R
+test.R
+exception.test.R
+distribution.assesment.R
+run.R
+
+# Lintr
+.lintr
+inst/doc
+
+# Documentation
+docs
+*.Rproj
+
+# Plots and images
+test_figures/
+distribution_figures/

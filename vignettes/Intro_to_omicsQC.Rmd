@@ -1,0 +1,137 @@
+---
+title: "Introduction to omicsQC"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to omicsQC}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Loading package as well as example data.
+
+```{r setup, warning = FALSE, message = FALSE}
+library(omicsQC)
+data('example.qc.dataframe')
+data('sign.correction')
+data('ylabels')
+```
+
+```{r, echo=FALSE, message=FALSE, warning = FALSE}
+library(kableExtra)
+library(dplyr)
+```
+
+## Introduction and background
+This package can be subdivided into two parts, quality score calculation, and data visualization. The flowchart below displays how these parts interact, and the flow of data throughout the package. This vignette uses the data that the package comes with, but only displays the head, the first 6 rows, of each dataframe in consideration of space. 
+
+```{r, echo=FALSE, out.width="80%", fig.cap="Flowchart of omicsQC"}
+knitr::include_graphics("figures/omicsQCFlowchart.jpeg")
+```
+
+## 1. z-score calculation and accumulation
+In order to get a total score for the quality of a sample, this package will calculate the z-score of each test metric for each sample and then accumulate the z-scores for a total quality score. This package can be used independent of test metrics used. 
+
+### 1.1 Calculating z-scores: ```zscores.from.metrics()```
+This function takes the dataframe containing the sample metrics and calculates the z-score for each metric and sample. Each row of qc.data should correspond to a sample, and each column to a test metric. An example input is displayed in 1.1.1.
+
+#### 1.1.1 Input dataframe, ```data('example.qc.dataframe')```
+```{r, echo=FALSE}
+head(example.qc.dataframe) %>% kbl() %>% kable_styling()
+```
+
+#### 1.1.2 Running ```zscores.from.metrics()```
+
+```{r}
+zscores <- zscores.from.metrics(example.qc.dataframe, filename = NULL)
+```
+
+
+#### 1.1.3 zscores
+The function returns zscores, which is a dataframe containing the z-scores for each sample and test metric. The example data in this package would return the dataframe below.
+
+```{r, echo=FALSE}
+head(zscores) %>% kbl() %>% kable_styling()
+```
+
+
+### 1.2 Adjusting the z-score signs: ```correct.zscore.signs()```
+This package is designed to be independent of test metrics used, but since some test metrics are better if they are larger and some are better if they are smaller, the sign of a poor z-score will differ between the metrics. We must therefore adjust the metrics such that negative z-scores is considered a bad measurement across all tests. This is done by providing a dataframe that states if a positive or a negative z-score is good for each metric. It should be of the same format as the table displayed in 1.2.1 and have a value, 'neg' or 'pos' for each metric used.
+
+The function also sets all non-negative z-scores to zero to make sure positive and negative values do not cancel each other out when we calculate an accumulated score. 
+
+Apart from the zscores, and sign.correct, the function also takes the names of the columns containing the metric name and the sign instructions in sign.correct.
+
+#### 1.2.1 Sign Adjustment dataframe, ```data('sign.correction')```
+
+```{r, echo=FALSE}
+head(sign.correction) %>% kbl() %>% kable_styling()
+```
+
+#### 1.2.2 Running ```correct.zscore.signs()```
+```{r}
+zscores.corrected <- correct.zscore.signs(zscores, sign.correction, 'Metric', 'Sign')
+```
+
+#### 1.2.3 zscores.corrected
+zscores.corrected can now be used to calculate accumulated scores for each sample.
+```{r, echo=FALSE}
+head(zscores.corrected) %>% kbl() %>% kable_styling()
+```
+
+
+### 1.3 Calculating total score: accumulate.zscores()
+accumulate.zscores takes the zscores.corrected dataframe and calculates a total quality score for each sample. It does this by summing over all negative z-scores. It then orders the data by quality score size and returns it.
+
+#### 1.3.1 Running ```accumulate.zscores()```
+
+```{r}
+quality.scores <- accumulate.zscores(zscores.corrected)
+```
+
+#### 1.3.2 quality.scores
+```{r, echo=FALSE}
+head(quality.scores) %>% kbl() %>% kable_styling()
+```
+
+## 2. Data visualisation
+The second aspect of the package is the standard visualisation of the QC data. This is implemented using the package BoutrosLab.plotting.general. These functions offer standardised, hard-coded plots to simplify the data visualisation, however one can also implement the plots themselves for more customisability.
+
+### 2.1 Quality Score Barplot: ```get.qc.barplot()```
+This function takes the accumulated quality scores and returns a barplot ranging from lowest to highest. It also plots a cut-off for what the accepted lowest score is. If filename is not NULL, it is saved to file, else the trellis object is returned.
+
+```{r}
+qc.barplot <- get.qc.barplot(quality.scores)
+```
+
+```{r, echo=FALSE, out.width="80%", fig.cap="Barplot generatde by get.qc.barplot()"}
+knitr::include_graphics("figures/barplot.pdf")
+```
+
+### 2.2 Z-Score Heatmap: ```get.qc.heatmap()```
+This function takes the dataframe with the z-scores for each sample and metric as well as vector of labels for the y-axis. The labels should be the full names of the metrics in the same order as they are in the dataframe. The function returns a standardised heatmap. If filename is not NULL, it is saved to file, else the trellis object is returned.
+
+``` {r}
+qc.heatmap <- get.qc.heatmap(zscores.corrected, ylabels)
+```
+
+```{r, echo=FALSE, out.width="80%", fig.cap="Heatmap generated by get.qc.heatmap()"}
+knitr::include_graphics("figures/heatmap.pdf")
+```
+
+### 2.3 Aggregating the plots: ```get.qc.multipanelplot()```
+Now that both the heat map and barplot has been generated they can be aggregated to a multipanelplot. get.qc.multipanelplot() takes the barplot, heatmap and a filename and concatenates the plots in a standardised format and saves the multipanelplot to file. 
+
+``` {r}
+qc.multipanel <- get.qc.multipanelplot(qc.barplot, qc.heatmap)
+```
+
+```{r, echo=FALSE, out.width="80%", fig.cap="The final multipanelplot generated"}
+knitr::include_graphics("figures/multipanelplot.pdf")
+```

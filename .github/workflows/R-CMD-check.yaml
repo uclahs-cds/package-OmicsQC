@@ -1,0 +1,20 @@
+---
+name: R-CMD-check
+
+on:
+   - push
+   - pull_request
+
+jobs:
+   R-CMD-check:
+      runs-on: ubuntu-latest
+
+      container:
+         image: blcdsdockerregistry/bl-r-devel:latest
+
+      steps:
+         - uses: actions/checkout@v2
+           with:
+              path: omicsQC
+         - run: R CMD build --compact-vignettes="gs+qpdf" omicsQC
+         - run: R CMD check --as-cran --run-donttest omicsQC*.tar.gz
