@@ -1,7 +1,7 @@
 #' Calculate z-scores for each metric across each sample
 #'
 #' This function takes a dataframe of QC metrics, and calculcates the
-#' the z-scores. If filename is specified, the results will be save to file.
+#' the z-scores. If filename is specified, the results will be saved to file.
 #'
 #' @param qc.data A dataframe whose rows are samples and each column a QC metric
 #' @param filename A filename where to save data. If NULL data will not be saved to file
