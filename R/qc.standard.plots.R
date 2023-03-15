@@ -105,7 +105,7 @@ get.qc.heatmap <- function(
     ) {
     heatmap <- BoutrosLab.plotting.general::create.heatmap(
         filename = filename,
-        x = zscores,
+        x = t(zscores),
         # Axes labels
         yaxis.lab = ylabels,
         yaxis.cex = yaxis.cex,

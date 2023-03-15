@@ -33,7 +33,7 @@ zscores.from.metrics <- function(qc.data, filename = NULL) {
 #' For some metrics a high z-score is good, while for others a low
 #' one is good. This functions corrects for that so that a negative z-score
 #' is a poor score for every metric. It then sets all positive scores
-#' to zero, and transposes the dataframe for use in visualisation.
+#' to zero.
 #'
 #' @param zscores A dataframe whose rows are samples and each column a QC metric, entries are z-scores
 #' @param signs.data A dataframe of two columns, the metric names and the sign of the metric
@@ -59,8 +59,6 @@ correct.zscore.signs <- function(
         }
 
     zscores[0 < zscores] <- 0;
-
-    zscores <- t(zscores);
 
     if (!is.null(filename)) {
         write.table(
@@ -88,7 +86,7 @@ accumulate.zscores <- function(zscores.corrected, filename = NULL) {
 
     numeric.df.check(zscores.corrected);
 
-    quality.scores <- colSums(zscores.corrected);
+    quality.scores <- rowSums(zscores.corrected);
 
     quality.scores.df <- data.frame(
         'Sample' = names(quality.scores),

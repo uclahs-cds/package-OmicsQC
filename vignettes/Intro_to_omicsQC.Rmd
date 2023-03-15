@@ -16,14 +16,14 @@ knitr::opts_chunk$set(
 
 Loading package as well as example data.
 
-```{r setup}
+```{r setup, warning = FALSE, message = FALSE}
 library(omicsQC)
 data('example.qc.dataframe')
 data('sign.correction')
 data('ylabels')
 ```
 
-```{r, echo=FALSE, message=FALSE}
+```{r, echo=FALSE, message=FALSE, warning = FALSE}
 library(kableExtra)
 library(dplyr)
 ```
@@ -64,9 +64,9 @@ head(zscores) %>% kbl() %>% kable_styling()
 ### 1.2 Adjusting the z-score signs: ```correct.zscore.signs()```
 This package is designed to be independent of test metrics used, but since some test metrics are better if they are larger and some are better if they are smaller, the sign of a poor z-score will differ between the metrics. We must therefore adjust the metrics such that negative z-scores is considered a bad measurement across all tests. This is done by providing a dataframe that states if a positive or a negative z-score is good for each metric. It should be of the same format as the table displayed in 1.2.1 and have a value, 'neg' or 'pos' for each metric used.
 
-The function also sets all non-negative z-scores to zero to make sure positive and negative values do not cancel each other out when we calculate an accumulated score. The dataframe is also transposed for later data visualization.
+The function also sets all non-negative z-scores to zero to make sure positive and negative values do not cancel each other out when we calculate an accumulated score. 
 
-Apart from the zscores, and sign.correct, the function also takes the names of the columns containing the metric name and the sign instructions.
+Apart from the zscores, and sign.correct, the function also takes the names of the columns containing the metric name and the sign instructions in sign.correct.
 
 #### 1.2.1 Sign Adjustment dataframe, ```data('sign.correction')```
 
