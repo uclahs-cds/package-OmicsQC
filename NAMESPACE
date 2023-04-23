@@ -2,6 +2,7 @@
 
 export(accumulate.zscores)
 export(correct.zscore.signs)
+export(fit.and.evaluate)
 export(get.qc.barplot)
 export(get.qc.heatmap)
 export(get.qc.multipanelplot)

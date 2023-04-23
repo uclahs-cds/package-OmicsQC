@@ -109,14 +109,6 @@ work/
 *.tsv
 *.rsav
 
-# Temporary R-Files
-000_HEADER.R
-199.QC.Metrics.Heatmap.R
-test.R
-exception.test.R
-distribution.assesment.R
-run.R
-
 # Lintr
 .lintr
 inst/doc
@@ -128,3 +120,4 @@ docs
 # Plots and images
 test_figures/
 distribution_figures/
+devtest/
