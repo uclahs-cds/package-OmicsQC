@@ -2,7 +2,14 @@
 #'
 #' This function takes the accumulated QC scores, a vector of distributions
 #' and a trimming factor. It then returns the results for each distribution
-#' in a dataframe.
+#' in a dataframe. This function supports the following distributions:
+#' * 'weibull'
+#' * 'norm'
+#' * 'gamma'
+#' * 'exp'
+#' * 'lnorm'
+#' * 'cauchy'
+#' * 'logis'
 #'
 #' @param quality.scores The accumulated QC scores, the output of accumulate.zscores
 #' @param distributions A vector of distributions to fit and test
@@ -15,8 +22,14 @@ fit.and.evaluate <- function(
     )
     {
 
+    distributions.available <- c('weibull', 'norm', 'gamma', 'exp', 'lnorm', 'cauchy', 'logis');
+
+    if (!all(distributions %in% distributions.available)) {
+        stop('At least one of the distributions is not available. Please see documentation.')
+    }
+
     no.distributions <- length(distributions);
-    ks.rejected <- logical(no.distributions);
+    KS.rejected <- logical(no.distributions);
     BIC.value <- numeric(no.distributions);
 
     no.samples <- nrow(quality.scores);
@@ -30,17 +43,17 @@ fit.and.evaluate <- function(
         fit <- fitdistrplus::fitdist(-quality.scores$Sum, distributions[i]);
         gof <- fitdistrplus::gofstat(fit);
 
-        ks.rejected[i] <- gof$kstest == 'rejected';
+        KS.rejected[i] <- gof$kstest == 'rejected';
         BIC.value[i] <- fit$bic;
         }
 
-    dist.df <- data.frame(
-        distributions = distributions,
-        ks.rejected = ks.rejected,
+    results.df <- data.frame(
+        distribution = distributions,
+        KS.rejected = KS.rejected,
         BIC.value = BIC.value
         );
 
-    dist.df <- dist.df[order(dist.df$BIC.value), ];
+    results.df <- results.df[order(results.df$BIC.value), ];
 
-    return(dist.df);
+    return(results.df);
     }
