@@ -20,5 +20,14 @@ fit.and.evaluate(
 \description{
 This function takes the accumulated QC scores, a vector of distributions
 and a trimming factor. It then returns the results for each distribution
-in a dataframe.
+in a dataframe. This function supports the following distributions:
+\itemize{
+\item 'weibull'
+\item 'norm'
+\item 'gamma'
+\item 'exp'
+\item 'lnorm'
+\item 'cauchy'
+\item 'logis'
+}
 }
