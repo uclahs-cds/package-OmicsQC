@@ -25,7 +25,7 @@ fit.and.evaluate <- function(
     distributions.available <- c('weibull', 'norm', 'gamma', 'exp', 'lnorm', 'cauchy', 'logis');
 
     if (!all(distributions %in% distributions.available)) {
-        stop('At least one of the distributions is not available. Please see documentation.')
+        stop('At least one of the distributions is not available. Please see documentation.');
     }
 
     no.distributions <- length(distributions);
@@ -35,8 +35,8 @@ fit.and.evaluate <- function(
     no.samples <- nrow(quality.scores);
     trim.num <- round(no.samples * trim.factor);
 
-    quality.scores <- quality.scores[-((no.samples - trim.num + 1):no.samples), ];
-    quality.scores <- quality.scores[-(1:trim.num), ];
+    quality.scores <- quality.scores[- ((no.samples - trim.num + 1):no.samples), ];
+    quality.scores <- quality.scores[- (1:trim.num), ];
 
     for (i in seq_len(no.distributions)){
 
