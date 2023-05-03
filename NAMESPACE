@@ -2,6 +2,8 @@
 
 export(accumulate.zscores)
 export(correct.zscore.signs)
+export(cosine.similarity.cutoff)
+export(cosine.similarity.iterative.testing)
 export(fit.and.evaluate)
 export(get.qc.barplot)
 export(get.qc.heatmap)
