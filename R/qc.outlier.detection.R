@@ -59,8 +59,6 @@ fit.and.evaluate <- function(
     }
 
 
-
-###### Get cut-off ##########
 #' Tests the accumulated quality scores for outliers using cosine similarity
 #' 
 #' This function takes quality.scores, trims it and fits it to the distribution given.
@@ -221,7 +219,7 @@ cosine.similarity.cutoff <- function(
     quality.scores,
     no.simulations,
     distribution,
-    trim.factor = 0.5,
+    trim.factor = 0.05,
     alpha.significant = 0.05
     ) {
 
