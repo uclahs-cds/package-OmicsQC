@@ -6,6 +6,7 @@
 \usage{
 get.qc.heatmap(
   zscores,
+  quality.scores,
   ylabels,
   filename = NULL,
   yaxis.cex = 0.8,
@@ -28,6 +29,8 @@ get.qc.heatmap(
 }
 \arguments{
 \item{zscores}{A dataframe of sign-corrected z-scores for each sample and test metric}
+
+\item{quality.scores}{A dataframe with columns 'Sum' (of scores) and 'Sample'}
 
 \item{ylabels}{A vector of metric labels for the y-axis}
 
@@ -72,6 +75,8 @@ The heatmap or NULL depending if filename is specified
 This function takes the the scores for each sample and each metric,
 after being sign-corrected, and returns the standard heatmap, if filename
 is NULL. If filename is not NULL it saves the heatmap to file and returns NULL.
+The function also takes quality.scores to make sure the samples are ordered correctly, as well as the y labels
+for the quality metrics.
 get.qc.heatmap offers a standard template for generating a QC heatmap, but can also take any parameter
 that BoutrosLab.plotting.general::create.barplot takes for customisability.
 }
