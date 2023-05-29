@@ -87,14 +87,12 @@ cosine.similarity.iterative.testing <- function(
     alpha.significant = 0.05
     ) {
 
-    # Check if distribution is valid
     distributions.available <- c('weibull', 'norm', 'gamma', 'exp', 'lnorm', 'cauchy', 'logis');
 
     if (!(distribution %in% distributions.available)) {
         stop('Please use one of the available distributions');
         }
 
-    # Set up variables for while loop
     significant.pvalue <- TRUE;
     no.outliers <- 0;
     outlier.labels <- c();
@@ -104,23 +102,19 @@ cosine.similarity.iterative.testing <- function(
 
     while (significant.pvalue) {
 
-        # Trim Data before fit to get parameters
         no.samples <- nrow(observed.data);
         trim.num <- round(no.samples * trim.factor);
 
         observed.data.trimmed <- observed.data[-((no.samples - trim.num + 1):no.samples), ];
         observed.data.trimmed <- observed.data.trimmed[-(1:trim.num), ];
 
-        # Get parameters
         fit <- fitdistrplus::fitdist(observed.data.trimmed$Sum, distribution);
 
-        # Set up args to pass to functions
         p <- ppoints(observed.data$Sum);
         args <- as.list(fit$estimate);
         args.q <- rlist::list.append(args, p = p);
         args.r <- rlist::list.append(args, n = no.samples);
 
-        # Calculate cosine similarity for observed data
         observed.data.quantile <- quantile(
             x = observed.data$Sum,
             prob = p
@@ -136,7 +130,6 @@ cosine.similarity.iterative.testing <- function(
             y = c(1, 1)
             );
 
-        # Simulate data
         theoretical.distributions <- matrix(
             data = NA,
             nrow = no.simulations,
@@ -150,7 +143,6 @@ cosine.similarity.iterative.testing <- function(
                 );
             }
 
-        # Create NULL distribution
         cos.similarity.nulldist <- numeric(no.simulations);
 
         theoretical.data.quantile <- do.call(
@@ -170,12 +162,10 @@ cosine.similarity.iterative.testing <- function(
                 );
             }
 
-        # Calculate p-value of largest datapoint
         simulated.cos.sim.smaller <- sum(cos.similarity.nulldist < cos.similarity.obs[1, 1]);
         pvalue <- simulated.cos.sim.smaller / no.simulations;
         significant.pvalue <- pvalue < alpha.significant;
 
-        # If significant: remove largest datapoint and save to results. Then redo with 2nd largest.
         if (significant.pvalue) {
             no.outliers <- no.outliers + 1;
             outlier.labels <- append(
@@ -223,28 +213,24 @@ cosine.similarity.cutoff <- function(
     alpha.significant = 0.05
     ) {
 
-    # Check if distribution is valid
     distributions.available <- c('weibull', 'norm', 'gamma', 'exp', 'lnorm', 'cauchy', 'logis');
 
     if (!(distribution %in% distributions.available)) {
         stop('Please use one of the available distributions');
         }
 
-    # Trim Data before getting parameters
     no.samples <- nrow(quality.scores);
     trim.num <- round(no.samples * trim.factor);
 
     quality.scores.trimmed <- quality.scores[-((no.samples - trim.num + 1):no.samples), ];
     quality.scores.trimmed <- quality.scores.trimmed[-(1:trim.num), ];
 
-    # Get parameters and set up args for passing to functions
     fit <- fitdistrplus::fitdist(-quality.scores.trimmed$Sum, distribution);
     p <- ppoints(-quality.scores$Sum);
     args <- as.list(fit$estimate);
     args.q <- rlist::list.append(args, p = p);
     args.r <- rlist::list.append(args, n = no.samples);
 
-    # Simulate data
     theoretical.distributions <- matrix(
         data = NA,
         nrow = no.simulations,
@@ -258,7 +244,6 @@ cosine.similarity.cutoff <- function(
             );
         }
 
-    # Create NULL distribution
     cos.similarity.nulldist <- numeric(no.simulations);
 
     theoretical.data.quantile <- do.call(
@@ -278,7 +263,6 @@ cosine.similarity.cutoff <- function(
             );
         }
 
-    # Calculate cutoff
     theoretical.data.quantile <- do.call(
         what = paste0('q', distribution),
         args = args.q
@@ -293,7 +277,6 @@ cosine.similarity.cutoff <- function(
 
     no.outliers <- sum(-quality.scores$Sum > cutoff);
 
-    # Combine and return results
     results <- list(
         "cutoff" = cutoff,
         "no.outliers" = no.outliers,
