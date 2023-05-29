@@ -8,7 +8,7 @@ cosine.similarity.cutoff(
   quality.scores,
   no.simulations,
   distribution,
-  trim.factor = 0.5,
+  trim.factor = 0.05,
   alpha.significant = 0.05
 )
 }
