@@ -79,7 +79,7 @@ fit.and.evaluate <- function(
 #' @param alpha.significant Alpha value for significance
 #' @param distribution A distribution to test
 #' @export
-cosine.similarity.iterative.testing <- function(
+cosine.similarity.iterative <- function(
     quality.scores,
     no.simulations,
     distribution,
