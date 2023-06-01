@@ -62,7 +62,7 @@ fit.and.evaluate <- function(
 #' Tests the accumulated quality scores for outliers using cosine similarity
 #' 
 #' This function takes quality.scores, trims it and fits it to the distribution given.
-#' It then iterratively tests the largest datapoint compared a null distribution of size
+#' It then iteratively tests the largest datapoint compared a null distribution of size
 #' no.simulations. If the largest datapoint has a significant p-value it tests the 2nd largest
 #' one and so on. The function supports the following distributions:
 #' * 'weibull'
@@ -144,11 +144,6 @@ cosine.similarity.iterative <- function(
             }
 
         cos.similarity.nulldist <- numeric(no.simulations);
-
-        theoretical.data.quantile <- do.call(
-            what = paste0('q', distribution),
-            args = args.q
-            );
 
         for (i in 1:no.simulations) {
             simulated.data.quantile <- quantile(
@@ -286,7 +281,7 @@ cosine.similarity.cutoff <- function(
     return(results);
     }
 
-#' Calculates the cutoff for what the largest observeded value have to be to be considered an outlier.
+#' Calculates the cutoff for what the largest observed value have to be considered an outlier.
 #'
 #' @param theoretical.data.quantile.max The largest theoretical value from quantile estimation
 #' @param cos.sim.cutoff The cosine similarity value which is on the threshold to having a signficant p-value
