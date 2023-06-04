@@ -22,11 +22,7 @@ fit.and.evaluate <- function(
     )
     {
 
-    distributions.available <- c('weibull', 'norm', 'gamma', 'exp', 'lnorm', 'cauchy', 'logis');
-
-    if (!all(distributions %in% distributions.available)) {
-        stop('At least one of the distributions is not available. Please see documentation.');
-    }
+    distributions <- match.arg(distributions, several.ok = TRUE);
 
     no.distributions <- length(distributions);
     KS.rejected <- logical(no.distributions);
@@ -77,21 +73,17 @@ fit.and.evaluate <- function(
 #' @param no.simulations The number of datasets to simulate
 #' @param trim.factor What fraction of values of each to trim to get parameters without using extremes
 #' @param alpha.significant Alpha value for significance
-#' @param distribution A distribution to test
+#' @param distribution A distribution to test, will default to 'lnorm'
 #' @export
 cosine.similarity.iterative <- function(
     quality.scores,
     no.simulations,
-    distribution,
+    distribution = c('lnorm', 'weibull', 'norm', 'gamma', 'exp', 'cauchy', 'logis'),
     trim.factor = 0.05,
     alpha.significant = 0.05
     ) {
 
-    distributions.available <- c('weibull', 'norm', 'gamma', 'exp', 'lnorm', 'cauchy', 'logis');
-
-    if (!(distribution %in% distributions.available)) {
-        stop('Please use one of the available distributions');
-        }
+    distribution <- match.arg(distribution);
 
     significant.pvalue <- TRUE;
     no.outliers <- 0;
@@ -112,8 +104,8 @@ cosine.similarity.iterative <- function(
 
         p <- ppoints(observed.data$Sum);
         args <- as.list(fit$estimate);
-        args.q <- rlist::list.append(args, p = p);
-        args.r <- rlist::list.append(args, n = no.samples);
+        args.q <- c(args, list('p' = p));
+        args.r <- c(args, list('n' = no.samples));
 
         observed.data.quantile <- quantile(
             x = observed.data$Sum,
@@ -198,21 +190,17 @@ cosine.similarity.iterative <- function(
 #' @param no.simulations The number of datasets to simulate
 #' @param trim.factor What fraction of values of each to trim to get parameters without using extremes
 #' @param alpha.significant Alpha value for significance
-#' @param distribution A distribution to test
+#' @param distribution A distribution to test, will default to 'lnorm'
 #' @export
 cosine.similarity.cutoff <- function(
     quality.scores,
     no.simulations,
-    distribution,
+    distribution = c('lnorm', 'weibull', 'norm', 'gamma', 'exp', 'cauchy', 'logis'),
     trim.factor = 0.05,
     alpha.significant = 0.05
     ) {
 
-    distributions.available <- c('weibull', 'norm', 'gamma', 'exp', 'lnorm', 'cauchy', 'logis');
-
-    if (!(distribution %in% distributions.available)) {
-        stop('Please use one of the available distributions');
-        }
+    distribution <- match.arg(distribution);
 
     no.samples <- nrow(quality.scores);
     trim.num <- round(no.samples * trim.factor);
@@ -223,8 +211,8 @@ cosine.similarity.cutoff <- function(
     fit <- fitdistrplus::fitdist(-quality.scores.trimmed$Sum, distribution);
     p <- ppoints(-quality.scores$Sum);
     args <- as.list(fit$estimate);
-    args.q <- rlist::list.append(args, p = p);
-    args.r <- rlist::list.append(args, n = no.samples);
+    args.q <- c(args, list('p' = p));
+    args.r <- c(args, list('n' = no.samples));
 
     theoretical.distributions <- matrix(
         data = NA,
@@ -281,7 +269,7 @@ cosine.similarity.cutoff <- function(
     return(results);
     }
 
-#' Calculates the cutoff for what the largest observed value have to be considered an outlier.
+#' Calculates the cutoff for what the largest observed value has to be, in order to be considered an outlier.
 #'
 #' @param theoretical.data.quantile.max The largest theoretical value from quantile estimation
 #' @param cos.sim.cutoff The cosine similarity value which is on the threshold to having a signficant p-value
