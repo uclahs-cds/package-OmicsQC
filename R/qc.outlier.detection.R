@@ -214,14 +214,14 @@ cosine.similarity.cutoff <- function(
     args.q <- c(args, list('p' = p));
     args.r <- c(args, list('n' = no.samples));
 
-    theoretical.distributions <- matrix(
+    simulated.distributions <- matrix(
         data = NA,
         nrow = no.simulations,
         ncol = no.samples
         );
 
     for (i in 1:no.simulations) {
-        theoretical.distributions[i, ] <- do.call(
+        simulated.distributions[i, ] <- do.call(
             what = paste0('r', distribution),
             args = args.r
             );
@@ -236,7 +236,7 @@ cosine.similarity.cutoff <- function(
 
     for (i in 1:no.simulations) {
         simulated.data.quantile <- quantile(
-            x = theoretical.distributions[i, ],
+            x = simulated.distributions[i, ],
             prob = p
             );
 
@@ -245,11 +245,6 @@ cosine.similarity.cutoff <- function(
             y = c(1, 1)
             );
         }
-
-    theoretical.data.quantile <- do.call(
-        what = paste0('q', distribution),
-        args = args.q
-        );
 
     alpha.cutoff.cos.sim <- quantile(
         x = cos.similarity.nulldist,
