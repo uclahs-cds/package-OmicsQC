@@ -103,7 +103,7 @@ accumulate.zscores <- function(zscores.corrected, filename = NULL) {
 
     if (!is.null(filename)) {
         write.table(
-            x = zscores.corrected,
+            x = quality.scores.df,
             file = filename,
             quote = FALSE,
             row.names = TRUE,
