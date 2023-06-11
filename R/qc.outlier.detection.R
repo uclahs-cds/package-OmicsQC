@@ -122,14 +122,14 @@ cosine.similarity.iterative <- function(
             y = c(1, 1)
             );
 
-        theoretical.distributions <- matrix(
+        simulated.distributions <- matrix(
             data = NA,
             nrow = no.simulations,
             ncol = no.samples
             );
 
         for (i in 1:no.simulations) {
-            theoretical.distributions[i, ] <- do.call(
+            simulated.distributions[i, ] <- do.call(
                 what = paste0('r', distribution),
                 args = args.r
                 );
@@ -139,7 +139,7 @@ cosine.similarity.iterative <- function(
 
         for (i in 1:no.simulations) {
             simulated.data.quantile <- quantile(
-                x = theoretical.distributions[i, ],
+                x = simulated.distributions[i, ],
                 prob = p
                 );
 
