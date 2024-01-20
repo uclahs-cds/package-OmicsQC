@@ -34,13 +34,13 @@ library(dplyr);
 omicsQC is a package designed to nominate outlier samples in genomic experimental cohorts. The package can be subdivided into three parts, quality score calculation, outlier detection, and data visualization. The flowchart below displays how these parts interact, and the flow of data throughout the package. The package comes with example data, consisting of 100 samples that all have been scored according to 26 quality metrics.
 
 ```{r, echo=FALSE, out.width="80%", fig.cap="Flowchart of omicsQC"}
-knitr::include_graphics("figures/omicsQCFlowchart_v2.png")
+knitr::include_graphics("omicsQCFlowchart.png")
 ```
 
 ## z-score calculation and accumulation
 
 ### Calculating z-scores: ```zscores.from.metrics()``
-In order to get a total score for the quality of a sample, this package will calculate the z-score of each test metric for each sample and then accumulate the z-scores for a total quality score. This package can be used independent of test metrics used. 
+In order to get a total score for the quality of a sample, this package will calculate the z-score of each test metric for each sample and then accumulate the z-scores for a total quality score. This package can be used independent of test metrics used.
 
 ```zscores.from.metrics()``` takes the dataframe containing the sample metrics and calculates the z-score for each metric and sample. Each row of qc.data should correspond to a sample, and each column to a test metric. An example input dataframe can be seen below.
 
@@ -196,12 +196,12 @@ knitr::include_graphics("figures/heatmap.pdf")
 ```
 
 ### Aggregating the plots: ```get.qc.multipanelplot()```
-Now that both the heat map and barplot has been generated they can be aggregated to a multipanelplot. get.qc.multipanelplot() takes the barplot, heatmap and a filename and concatenates the plots in a standardised format and saves the multipanelplot to file. 
+Now that both the heat map and barplot has been generated they can be aggregated to a multipanelplot. get.qc.multipanelplot() takes the barplot, heatmap and a filename and concatenates the plots in a standardised format and saves the multipanelplot to file.
 
 ``` {r}
 qc.multipanel <- get.qc.multipanelplot(qc.barplot, qc.heatmap)
 ```
 
 ```{r, echo=FALSE, out.width="80%", fig.cap="The final multipanelplot generated"}
-knitr::include_graphics("figures/multipanelplot.pdf")
+knitr::include_graphics("multipanelplot.png")
 ```
