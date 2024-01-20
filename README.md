@@ -12,7 +12,7 @@
 
 OmicsQC is a statistical framework for integrating quality control metrics from multi-sample experiments such as those investigated in large cohort-level genomic profiling studies. Metrics are aggregated into quality scores which can be used to nominate samples for exclusion.
 
-![overview plot](vignettes/figures/omicsQCFlowchart_v2.png)
+![overview plot](vignettes/omicsQCFlowchart.png)
 
 ## Installation
 
