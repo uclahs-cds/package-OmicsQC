@@ -82,13 +82,6 @@ work/
 *.zip
 *.bz2
 
-# Image file
-*.jpg
-*.png
-*.tif
-*.tiff
-*.gif
-
 # Document file
 *.rtf
 *.doc
@@ -121,3 +114,5 @@ docs
 test_figures/
 distribution_figures/
 devtest/
+/doc/
+/Meta/
