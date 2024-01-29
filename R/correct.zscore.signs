@@ -1,7 +1,7 @@
 #' Corrects the z-scores signs according to the metrics
 #'
 #' For some metrics a high z-score is good, while for others a low
-#' one is good. This functions corrects for that so that a negative z-score
+#' one is good. This function corrects for that so that a negative z-score
 #' is a poor score for every metric. It then sets all positive scores
 #' to zero.
 #'
@@ -21,6 +21,10 @@ correct.zscore.signs <- function(
     ) {
 
     numeric.df.check(zscores);
+
+    # TODO: check that all column names exist in signs data
+    # TODO: check that all metric.col.name elements exist in z score columns and vice versa
+    # TODO: check that all signs.col.name elements are in 'pos' and 'neg'
 
     negative.zscores <- signs.data[[metric.col.name]]['neg' == signs.data[[signs.col.name]]];
 
