@@ -1,14 +1,27 @@
-Package: omicsQC
+Package: OmicsQC
 Type: Package
 Title: A QC aggregating package for genomic data
 Version: 0.1.0
-Author: Hugo Frelin
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-Depends: 
+Authors@R:
+    c(
+    person(given = "Anders Hugo",
+           family = "Frelin",
+           email = "ahfrelin@g.ucla.edu",
+           role = c("aut", "cre")),
+    person(given = "Helen",
+           family = "Zhu",
+           role = c("aut"),
+           email = "helen.zhu@mail.utoronto.ca"),
+    person(given = "Paul C.",
+           family = "Boutros",
+           role = c("aut"),
+           email = "PBoutros@mednet.ucla.edu",
+           comment = c(ORCID = "0000-0003-0553-7520"))
+    )
+Description: A unbiased method to aggregate QC metrics from multi-sample experiments and perform outlier nomination
+Depends:
     R (>= 2.10)
-Suggests: 
+Suggests:
     knitr,
     rmarkdown,
     testthat (>= 3.0.0)
