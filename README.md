@@ -127,7 +127,7 @@ Looking for guidance or support with OmicsQC? Look no further.
 
 Authors: Hugo Anders Frelin, Paul C. Boutros (PBoutros@mednet.ucla.edu)
 
-[This project] is licensed under the GNU General Public License version 2. See the file LICENSE.md for the terms of the GNU GPL license.
+OmicsQC is licensed under the GNU General Public License version 2. See the file LICENSE.md for the terms of the GNU GPL license.
 
 OmicsQC aggregates quality control metrics from multi-sample investigations and nominates samples for exclusion using an unbiased strategy.
 
