@@ -1,5 +1,3 @@
-context("plotting")
-
 # Mainly checking that the three plotting functions
 # 1. get.qc.barplot
 # 2. get.qc.heatmap
