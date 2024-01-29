@@ -134,4 +134,12 @@ test_that("accumulate.zscores", {
     )
   )
 
+  # NA data - currently does not support missing data
+  # Need to be fixed in future iterations
+  na_zscores <- correct_signs
+  na_zscores[1,1] <- NA
+  expect_error(
+    accumulate.zscores(na_zscores)
+  )
+
 })
