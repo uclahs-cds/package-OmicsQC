@@ -9,8 +9,12 @@
 #' @export
 accumulate.zscores <- function(zscores.corrected, filename = NULL) {
 
+    # Error checking
     numeric.df.check(zscores.corrected);
-
+    if(is.null(rownames(zscores.corrected))){
+      stop("Please specify sample IDs by setting the rownames")
+    }
+    
     quality.scores <- rowSums(zscores.corrected);
 
     quality.scores.df <- data.frame(
