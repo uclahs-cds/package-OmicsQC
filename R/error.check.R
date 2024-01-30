@@ -1,17 +1,33 @@
-#' Test if a dataframe is fully numeric. Raises and error if the dataframe is not.
+#' Test if the zscore dataframe is correctly formatted. Raises and error if it is not.
 #'
-#' @param dataframe The dataframe one wants to test
+#' @param zscores The dataframe one wants to test
 #' @noRd
-numeric.df.check <- function(dataframe) {
+zscore.format.check <- function(zscores) {
 
-    dataframe.numeric <- all(apply(dataframe, 2, is.numeric));
+    # Numeric data frame
+    dataframe.numeric <- all(apply(zscores, 2, is.numeric));
 
     if (!dataframe.numeric) {
         stop('dataframe is not fully numeric');
         }
 
+    # Column names and row names
+    if(is.null(rownames(zscores))){
+        stop("Please specify sample IDs by setting the rownames");
+        }
+
+    if(is.null(colnames(zscores))){
+        stop("Please specify metrics by setting the colnames");
+        }
+
+    # Missing data
+    if(any(is.na(zscores))){
+        stop("Current version of OmicsQC does not support missing data")
+        }
+
     return(NULL);
     }
+    
 
 
 #' Test if a dataframe is the valid output of accumulate.zscores
