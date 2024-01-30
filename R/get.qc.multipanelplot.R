@@ -9,7 +9,7 @@
 #'
 #' @inheritParams BoutrosLab.plotting.general::create.multipanelplot
 #'
-#' @return The heatmap or NULL depending if filename is specified
+#' @return The multipanelplot or NULL depending if filename is specified
 #'
 #' @export
 get.qc.multipanelplot <- function(
@@ -25,7 +25,7 @@ get.qc.multipanelplot <- function(
     ylab.axis.padding = -19,
     left.padding = 8,
     main = 'QC Summary',
-    main.cex = 0,
+    main.cex = 1,
     ...
     ) {
     BoutrosLab.plotting.general::create.multipanelplot(
@@ -39,8 +39,8 @@ get.qc.multipanelplot <- function(
         y.spacing = y.spacing,
         ylab.axis.padding = ylab.axis.padding,
         left.padding = left.padding,
-        main = 'QC Summary',
-        main.cex = 0,
+        main = main,
+        main.cex = main.cex,
         ...
         );
     }
