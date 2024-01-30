@@ -38,6 +38,19 @@ get.qc.barplot <- function(
     axes.lwd = 1,
     ...
     ) {
+
+    # Error checking
+    stopifnot(is.data.frame(quality.scores))
+    if(!("Sum" %in% colnames(quality.scores)) || !("Sample" %in% colnames(quality.scores))){
+      stop("quality.scores must be a data.frame that contains the columns Sum and Sample");
+    }
+    if(!is.numeric(quality.scores[,"Sum"])){
+      stop("The column Sum in quality.scores must be numeric");
+    }
+    if(!is.character(quality.scores[,"Sample"]) && !is.factor(quality.na_scores[,"Sample"])){
+      stop("Sample ids must be character or factor");
+    }
+
     barplot <- BoutrosLab.plotting.general::create.barplot(
         filename = filename,
         Sum ~ Sample,
