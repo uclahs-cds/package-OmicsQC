@@ -49,9 +49,29 @@ get.qc.heatmap <- function(
     axes.lwd = 1,
     ...
     ) {
+
+    # Error checking
+    stopifnot(numeric.df.check(zscores))
+    stopifnot(is.data.frame(quality.scores))
+    if(!("Sum" %in% colnames(quality.scores)) || !("Sample" %in% colnames(quality.scores))){
+      stop("quality.scores must be a data.frame that contains the columns Sum and Sample");
+    }
+    if(!is.numeric(quality.scores[,"Sum"])){
+      stop("The column Sum in quality.scores must be numeric");
+    }
+    if(!is.character(quality.scores[,"Sample"]) && !is.factor(quality.na_scores[,"Sample"])){
+      stop("Sample ids must be character or factor");
+    }
+    if(is.null(rownames(zscores)) || is.null(colnames(zscores))){
+      stop("Please specify sample ids by rownames and qc metrics by column names in zscore dataframe")
+    }
+    if(!setequal(rownames(zscores), as.character(quality.scores[,"Sample"]))){
+      stop("quality.scores-Sample and zscores-rownames do not contain the same elements")
+    }
+
     heatmap <- BoutrosLab.plotting.general::create.heatmap(
         filename = filename,
-        x = t(zscores[quality.scores[,"Sample"], ]),
+        x = t(zscores[as.character(quality.scores[,"Sample"]),]),
         # Axes labels
         yaxis.lab = yaxis.lab,
         yaxis.cex = yaxis.cex,
