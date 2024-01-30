@@ -49,8 +49,7 @@ test_that("zscore.from.metrics", {
   na_scores <- scores
   na_scores[1,1] <- NA
   expect_error(
-    zscores.from.metrics(na_scores),
-    NA
+    zscores.from.metrics(na_scores)
   )
 
   # Non-dataframe input
