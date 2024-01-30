@@ -7,9 +7,7 @@
 get.qc.barplot(
   quality.scores,
   filename = NULL,
-  cutoff = (function(x) {
-     x <- -20
- }),
+  abline.h = -20,
   yaxis.cex = 0.8,
   xaxis.cex = 0,
   yaxis.tck = 1,
@@ -17,8 +15,7 @@ get.qc.barplot(
   xlab.label = "",
   ylab.label = "Sum of Z (Z < 0)",
   ylab.cex = 1,
-  line.from = 0,
-  line.col = "darkgrey",
+  abline.col = "darkgrey",
   axes.lwd = 1,
   ...
 )
@@ -28,7 +25,7 @@ get.qc.barplot(
 
 \item{filename}{Filename for tiff output, or if NULL returns the trellis object itself}
 
-\item{cutoff}{A function to plot the cutoff for what is deemed a poor sample quality score}
+\item{abline.h}{Adds a horizontal line to the plot; useful for depicting the threshold for what is deemed a poor sample quality score}
 
 \item{yaxis.cex}{Size of y-axis tick labels, defaults to 0.8}
 
@@ -44,9 +41,7 @@ get.qc.barplot(
 
 \item{ylab.cex}{Size of y-axis label, defaults to 1}
 
-\item{line.from}{The starting point of the line on the plot}
-
-\item{line.col}{Colour of the line on the plot, defaults to 'darkgrey'}
+\item{abline.col}{Colour of the horizontal line on the plot, defaults to 'darkgrey'}
 
 \item{axes.lwd}{Specify line width of the axes; set to 0 to turn off axes}
 

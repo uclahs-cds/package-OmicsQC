@@ -7,9 +7,11 @@
 get.qc.heatmap(
   zscores,
   quality.scores,
-  ylabels,
+  yaxis.lab = colnames(zscores),
+  xaxis.lab = quality.scores[, "Sample"],
   filename = NULL,
   yaxis.cex = 0.8,
+  xaxis.cex = 0,
   xlab.cex = 1,
   xlab.label = "Samples",
   clustering.method = "none",
@@ -28,15 +30,19 @@ get.qc.heatmap(
 )
 }
 \arguments{
-\item{zscores}{A dataframe of sign-corrected z-scores for each sample and test metric}
+\item{zscores}{A dataframe of (sign-corrected) z-scores for each sample and test metric}
 
 \item{quality.scores}{A dataframe with columns 'Sum' (of scores) and 'Sample'}
 
-\item{ylabels}{A vector of metric labels for the y-axis}
+\item{yaxis.lab}{A vector of metric labels for the y-axis; defaults to column names of z-scores}
+
+\item{xaxis.lab}{A vector of sample labels for the x-axis; defaults to ordered Sample column elements in quality.scores}
 
 \item{filename}{Filename for tiff output, or if NULL returns the trellis object itself}
 
 \item{yaxis.cex}{Size of y-axis tick labels, defaults to 0.8}
+
+\item{xaxis.cex}{Size of x-axis tick labels, defaults to 0}
 
 \item{xlab.cex}{Size of x-axis label, defaults to 1}
 

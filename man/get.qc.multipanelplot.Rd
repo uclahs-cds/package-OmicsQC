@@ -17,7 +17,7 @@ get.qc.multipanelplot(
   ylab.axis.padding = -19,
   left.padding = 8,
   main = "QC Summary",
-  main.cex = 0,
+  main.cex = 1,
   ...
 )
 }
@@ -51,7 +51,7 @@ get.qc.multipanelplot(
 \item{...}{The function can also take any parameter that BoutrosLab.plotting.general::create.multipanelplot takes}
 }
 \value{
-The heatmap or NULL depending if filename is specified
+The multipanelplot or NULL depending if filename is specified
 }
 \description{
 This function takes the barplot and heatmap and returns the multipanel plot
