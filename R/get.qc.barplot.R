@@ -47,7 +47,7 @@ get.qc.barplot <- function(
     if(!is.numeric(quality.scores[,"Sum"])){
       stop("The column Sum in quality.scores must be numeric");
     }
-    if(!is.character(quality.scores[,"Sample"]) && !is.factor(quality.na_scores[,"Sample"])){
+    if(!is.character(quality.scores[,"Sample"]) && !is.factor(quality.scores[,"Sample"])){
       stop("Sample ids must be character or factor");
     }
 

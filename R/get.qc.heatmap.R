@@ -51,7 +51,7 @@ get.qc.heatmap <- function(
     ) {
 
     # Error checking
-    stopifnot(numeric.df.check(zscores))
+    numeric.df.check(zscores)
     stopifnot(is.data.frame(quality.scores))
     if(!("Sum" %in% colnames(quality.scores)) || !("Sample" %in% colnames(quality.scores))){
       stop("quality.scores must be a data.frame that contains the columns Sum and Sample");
@@ -59,7 +59,7 @@ get.qc.heatmap <- function(
     if(!is.numeric(quality.scores[,"Sum"])){
       stop("The column Sum in quality.scores must be numeric");
     }
-    if(!is.character(quality.scores[,"Sample"]) && !is.factor(quality.na_scores[,"Sample"])){
+    if(!is.character(quality.scores[,"Sample"]) && !is.factor(quality.scores[,"Sample"])){
       stop("Sample ids must be character or factor");
     }
     if(is.null(rownames(zscores)) || is.null(colnames(zscores))){
