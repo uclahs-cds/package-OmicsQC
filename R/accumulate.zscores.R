@@ -10,13 +10,7 @@
 accumulate.zscores <- function(zscores.corrected, filename = NULL) {
 
     # Error checking
-    numeric.df.check(zscores.corrected);
-    if(is.null(rownames(zscores.corrected))){
-      stop("Please specify sample IDs by setting the rownames");
-    }
-    if(any(is.na(zscores.corrected))){
-      stop("Current version of OmicsQC does not support missing data in zscore aggregation")
-    }
+    zscore.format.check(zscores.corrected);
 
     quality.scores <- rowSums(zscores.corrected);
 

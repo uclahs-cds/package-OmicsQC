@@ -9,7 +9,7 @@
 #' @export
 zscores.from.metrics <- function(qc.data, filename = NULL) {
 
-    numeric.df.check(qc.data);
+    zscore.format.check(qc.data);
 
     zscores <- apply(qc.data, 2, function(x) scale(x, center = TRUE, scale = TRUE));
 

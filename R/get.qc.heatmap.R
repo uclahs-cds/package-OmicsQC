@@ -8,8 +8,8 @@
 #' get.qc.heatmap offers a standard template for generating a QC heatmap, but can also take any parameter
 #' that BoutrosLab.plotting.general::create.barplot takes for customisability.
 #'
-#' @param zscores A dataframe of (sign-corrected) z-scores for each sample and test metric
-#' @param quality.scores A dataframe with columns 'Sum' (of scores) and 'Sample'
+#' @param zscores A dataframe of (sign-corrected) z-scores for each sample and test metric, i.e. the output of correct.zscore.signs
+#' @param quality.scores A dataframe with columns 'Sum' (of scores) and 'Sample', i.e. the output of accumulate.zscores
 #' @param yaxis.lab A vector of metric labels for the y-axis; defaults to column names of z-scores
 #' @param xaxis.lab A vector of sample labels for the x-axis; defaults to ordered Sample column elements in quality.scores
 #' @param yaxis.cex Size of y-axis tick labels, defaults to 0.8
@@ -51,23 +51,11 @@ get.qc.heatmap <- function(
     ) {
 
     # Error checking
-    numeric.df.check(zscores)
-    stopifnot(is.data.frame(quality.scores))
-    if(!("Sum" %in% colnames(quality.scores)) || !("Sample" %in% colnames(quality.scores))){
-      stop("quality.scores must be a data.frame that contains the columns Sum and Sample");
-    }
-    if(!is.numeric(quality.scores[,"Sum"])){
-      stop("The column Sum in quality.scores must be numeric");
-    }
-    if(!is.character(quality.scores[,"Sample"]) && !is.factor(quality.scores[,"Sample"])){
-      stop("Sample ids must be character or factor");
-    }
-    if(is.null(rownames(zscores)) || is.null(colnames(zscores))){
-      stop("Please specify sample ids by rownames and qc metrics by column names in zscore dataframe")
-    }
+    zscore.format.check(zscores);
+    accumulate.zscores.output.check(quality.scores);
     if(!setequal(rownames(zscores), as.character(quality.scores[,"Sample"]))){
-      stop("quality.scores-Sample and zscores-rownames do not contain the same elements")
-    }
+        stop("quality.scores-Sample and zscores-rownames do not contain the same elements")
+        }
 
     heatmap <- BoutrosLab.plotting.general::create.heatmap(
         filename = filename,
