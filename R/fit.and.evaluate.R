@@ -23,13 +23,10 @@ fit.and.evaluate <- function(
 
     # Error checking
     distributions <- match.arg(distributions, several.ok = TRUE);
-    if(!is.numeric(trim.factor) || (trim.factor > 0.5) || (trim.factor < 0)) {
-      stop("trim.factor must be a numeric between 0 and 0.5");
-    }
-    if(!("Sum" %in% colnames(quality.scores)) || !is.numeric(quality.scores$Sum)){
-      stop("quality scores do not have a valid column for aggregated zscores");
-    }
+    accumulate.zscores.output.check(quality.scores);
+    check.valid.trim.factor(trim.factor);
 
+    # Initializing variables
     no.distributions <- length(distributions);
     KS.rejected <- logical(no.distributions);
     BIC.value <- numeric(no.distributions);
@@ -37,9 +34,11 @@ fit.and.evaluate <- function(
     no.samples <- nrow(quality.scores);
     trim.num <- round(no.samples * trim.factor);
 
+    # Trimming quality scores
     quality.scores <- quality.scores[- ((no.samples - trim.num + 1):no.samples), ];
     quality.scores <- quality.scores[- (1:trim.num), ];
 
+    # Fitting distributions
     for (i in seq_len(no.distributions)){
 
         fit <- fitdistrplus::fitdist(-quality.scores$Sum, distributions[i]);
@@ -49,6 +48,7 @@ fit.and.evaluate <- function(
         BIC.value[i] <- fit$bic;
         }
 
+    # Compiling results
     results.df <- data.frame(
         distribution = distributions,
         KS.rejected = KS.rejected,

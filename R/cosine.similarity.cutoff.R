@@ -13,7 +13,7 @@
 #' * 'cauchy'
 #' * 'logis'
 #'
-#' @param quality.scores The output of accumulate.zscores
+#' @param quality.scores A dataframe with columns 'Sum' (of scores) and 'Sample', i.e. the output of accumulate.zscores
 #' @param no.simulations The number of datasets to simulate
 #' @param trim.factor What fraction of values of each to trim to get parameters without using extremes
 #' @param alpha.significant Alpha value for significance
@@ -27,20 +27,29 @@ cosine.similarity.cutoff <- function(
     alpha.significant = 0.05
     ) {
 
+    # Error checking
+    accumulate.zscores.output.check(quality.scores);
+    check.valid.no.simulations(no.simulations);
     distribution <- match.arg(distribution);
+    check.valid.trim.factor(trim.factor);
+    check.valid.alpha.significant(alpha.significant);
 
+    # Defining variables
     no.samples <- nrow(quality.scores);
     trim.num <- round(no.samples * trim.factor);
 
+    # Trimming quality scores
     quality.scores.trimmed <- quality.scores[-((no.samples - trim.num + 1):no.samples), ];
     quality.scores.trimmed <- quality.scores.trimmed[-(1:trim.num), ];
 
+    # Fitting distribution and extracting parameters
     fit <- fitdistrplus::fitdist(-quality.scores.trimmed$Sum, distribution);
     p <- ppoints(-quality.scores$Sum);
     args <- as.list(fit$estimate);
     args.q <- c(args, list('p' = p));
     args.r <- c(args, list('n' = no.samples));
 
+    # Simulating data
     simulated.distributions <- matrix(
         data = NA,
         nrow = no.simulations,
@@ -54,13 +63,17 @@ cosine.similarity.cutoff <- function(
             );
         }
 
+    # Initiating empty vector for cosine similarity
     cos.similarity.nulldist <- numeric(no.simulations);
 
+    # Calculating a theoretical quantile set
     theoretical.data.quantile <- do.call(
         what = paste0('q', distribution),
         args = args.q
         );
 
+    # Comparing each simulated dataset to the theoretical
+    # quantile set using cosine similarity
     for (i in 1:no.simulations) {
         simulated.data.quantile <- quantile(
             x = simulated.distributions[i, ],
@@ -73,15 +86,19 @@ cosine.similarity.cutoff <- function(
             );
         }
 
+    # Calculating quantiles of cosine similarity and
+    # determining threshold of cosine similarity required to achieve significance
     alpha.cutoff.cos.sim <- quantile(
         x = cos.similarity.nulldist,
         prob = c(alpha.significant)
         );
 
+    # Calculating cutoff and nominating outliers
     cutoff <- calculate.cutoff(max(theoretical.data.quantile), alpha.cutoff.cos.sim);
 
     no.outliers <- sum(-quality.scores$Sum > cutoff);
 
+    # Returning results
     results <- list(
         "cutoff" = cutoff,
         "no.outliers" = no.outliers,
