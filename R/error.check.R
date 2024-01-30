@@ -61,7 +61,7 @@ accumulate.zscores.output.check <- function(quality.scores) {
 #' @noRd
 check.valid.trim.factor <- function(trim.factor){
 
-    if(!is.numeric(trim.factor) || (trim.factor >= 0) || (trim.factor <= 0.5)) {
+    if(!is.numeric(trim.factor) || (trim.factor <= 0) || (trim.factor >= 0.5)) {
         stop("trim.factor must be a numeric in the range of [0, 0.5]");
         }
 
@@ -75,7 +75,7 @@ check.valid.trim.factor <- function(trim.factor){
 #' @noRd
 check.valid.alpha.significant <- function(alpha.significant){
 
-      if(!is.numeric(alpha.significant) || (alpha.significant >= 0) || (alpha.significant <= 1)) {
+      if(!is.numeric(alpha.significant) || (alpha.significant <= 0) || (alpha.significant >= 1)) {
           stop("alpha.significant must be a numeric in the range of [0, 1]");
           }
 
