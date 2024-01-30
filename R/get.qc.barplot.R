@@ -8,14 +8,14 @@
 #' takes for more customizability.
 #'
 #' @param quality.scores A dataframe with columns 'Sum' (of scores) and 'Sample'
-#' @param cutoff A function to plot the cutoff for what is deemed a poor sample quality score
+#' @param abline.h Adds a horizontal line to the plot; useful for depicting the threshold for what is deemed a poor sample quality score
 #' @param yaxis.cex Size of y-axis tick labels, defaults to 0.8
 #' @param xaxis.cex Size of x-axis tick labels, defaults to 0
 #' @param xaxis.tck	Specifies the length of the tick marks for x-axis, defaults to 0
 #' @param xlab.label The label for the x-axis, defaults to ''
 #' @param ylab.label label for the y-axis, defaults to 'Sum of Z (Z < 0)'
 #' @param ylab.cex Size of y-axis label, defaults to 1
-#' @param line.col Colour of the line on the plot, defaults to 'darkgrey'
+#' @param abline.col Colour of the horizontal line on the plot, defaults to 'darkgrey'
 #' @param ... The function can also take any parameter that BoutrosLab.plotting.general::create.barplot takes
 #'
 #' @inheritParams BoutrosLab.plotting.general::create.barplot
@@ -26,7 +26,7 @@
 get.qc.barplot <- function(
     quality.scores,
     filename = NULL,
-    cutoff = (function(x) {x <- -20}),
+    abline.h = -20,
     yaxis.cex = 0.8,
     xaxis.cex = 0,
     yaxis.tck = 1,
@@ -34,8 +34,7 @@ get.qc.barplot <- function(
     xlab.label = '',
     ylab.label = 'Sum of Z (Z < 0)',
     ylab.cex = 1,
-    line.from = 0,
-    line.col = 'darkgrey',
+    abline.col = 'darkgrey',
     axes.lwd = 1,
     ...
     ) {
@@ -52,10 +51,8 @@ get.qc.barplot <- function(
         ylab.label = ylab.label,
         ylab.cex = ylab.cex,
         # Line
-        line.func = cutoff,
-        line.from = line.from,
-        line.to = nrow(quality.scores),
-        line.col = line.col,
+        abline.h = abline.h,
+        abline.col = abline.col,
         ...
         );
     }
