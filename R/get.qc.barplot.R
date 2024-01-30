@@ -7,7 +7,7 @@
 #' a QC barplot, but can also take any parameter that BoutrosLab.plotting.general::create.barplot
 #' takes for more customizability.
 #'
-#' @param quality.scores A dataframe with columns 'Sum' (of scores) and 'Sample'
+#' @param quality.scores A dataframe with columns 'Sum' (of scores) and 'Sample', i.e. the output of accumulate.zscores
 #' @param abline.h Adds a horizontal line to the plot; useful for depicting the threshold for what is deemed a poor sample quality score
 #' @param yaxis.cex Size of y-axis tick labels, defaults to 0.8
 #' @param xaxis.cex Size of x-axis tick labels, defaults to 0
@@ -40,16 +40,7 @@ get.qc.barplot <- function(
     ) {
 
     # Error checking
-    stopifnot(is.data.frame(quality.scores))
-    if(!("Sum" %in% colnames(quality.scores)) || !("Sample" %in% colnames(quality.scores))){
-      stop("quality.scores must be a data.frame that contains the columns Sum and Sample");
-    }
-    if(!is.numeric(quality.scores[,"Sum"])){
-      stop("The column Sum in quality.scores must be numeric");
-    }
-    if(!is.character(quality.scores[,"Sample"]) && !is.factor(quality.scores[,"Sample"])){
-      stop("Sample ids must be character or factor");
-    }
+    accumulate.zscores.output.check(quality.scores); 
 
     barplot <- BoutrosLab.plotting.general::create.barplot(
         filename = filename,
