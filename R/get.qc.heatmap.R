@@ -8,10 +8,12 @@
 #' get.qc.heatmap offers a standard template for generating a QC heatmap, but can also take any parameter
 #' that BoutrosLab.plotting.general::create.barplot takes for customisability.
 #'
-#' @param zscores A dataframe of sign-corrected z-scores for each sample and test metric
+#' @param zscores A dataframe of (sign-corrected) z-scores for each sample and test metric
 #' @param quality.scores A dataframe with columns 'Sum' (of scores) and 'Sample'
-#' @param ylabels A vector of metric labels for the y-axis
+#' @param yaxis.lab A vector of metric labels for the y-axis; defaults to column names of z-scores
+#' @param xaxis.lab A vector of sample labels for the x-axis; defaults to ordered Sample column elements in quality.scores
 #' @param yaxis.cex Size of y-axis tick labels, defaults to 0.8
+#' @param xaxis.cex Size of x-axis tick labels, defaults to 0
 #' @param xlab.cex Size of x-axis label, defaults to 1
 #' @param xlab.label The label for the x-axis, defaults so 'Sample'
 #' @param at A vector specifying the breakpoints along the range of x; each interval specified by these breakpoints are assigned to a colour from the palette. Defaults to seq(0, -10, -2), to give a clear discrete display of colours. If x has values outside of the range specified by “at” those values are shown with the colours corresponding to the extreme ends of the colour spectrum and a warning is given.
@@ -26,9 +28,11 @@
 get.qc.heatmap <- function(
     zscores,
     quality.scores,
-    ylabels,
+    yaxis.lab = colnames(zscores),
+    xaxis.lab = quality.scores[,"Sample"],
     filename = NULL,
     yaxis.cex = 0.8,
+    xaxis.cex = 0,
     xlab.cex = 1,
     xlab.label = 'Samples',
     clustering.method = 'none',
@@ -47,10 +51,12 @@ get.qc.heatmap <- function(
     ) {
     heatmap <- BoutrosLab.plotting.general::create.heatmap(
         filename = filename,
-        x = t(zscores[row.names(quality.scores), ]),
+        x = t(zscores[quality.scores[,"Sample"], ]),
         # Axes labels
-        yaxis.lab = ylabels,
+        yaxis.lab = yaxis.lab,
         yaxis.cex = yaxis.cex,
+        xaxis.lab = xaxis.lab,
+        xaxis.cex = xaxis.cex,
         xlab.cex = xlab.cex,
         xlab.label = xlab.label,
         # Clustering
