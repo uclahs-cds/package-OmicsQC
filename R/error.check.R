@@ -40,3 +40,43 @@ accumulate.zscores.output.check <- function(quality.scores) {
 
     return(NULL);
     }
+
+#' Test if a trim.factor is valid
+#'
+#' @param trim.factor The trim.factor one wants to test
+#' @noRd
+check.valid.trim.factor <- function(trim.factor){
+
+    if(!is.numeric(trim.factor) || (trim.factor >= 0) || (trim.factor <= 0.5)) {
+        stop("trim.factor must be a numeric in the range of [0, 0.5]");
+        }
+
+    return(NULL);
+    }
+
+
+#' Test if a alpha.significant is valid
+#'
+#' @param alpha.significant The alpha.significant one wants to test
+#' @noRd
+check.valid.alpha.significant <- function(alpha.significant){
+
+      if(!is.numeric(alpha.significant) || (alpha.significant >= 0) || (alpha.significant <= 1)) {
+          stop("alpha.significant must be a numeric in the range of [0, 1]");
+          }
+
+      return(NULL);
+      }
+
+#' Test if a no.simulations is valid
+#'
+#' @param no.simulations The no.simulations one wants to test
+#' @noRd
+check.valid.no.simulations <- function(no.simulations){
+
+    if(!is.numeric(no.simulations) || !(no.simulations > 0)){
+        stop("no.simulations must be a positive number");
+        }
+
+    return(NULL);
+    }
