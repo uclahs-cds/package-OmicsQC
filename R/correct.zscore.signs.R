@@ -21,16 +21,16 @@ correct.zscore.signs <- function(
     ) {
 
     # Error checking
-    numeric.df.check(zscores);
+    zscore.format.check(zscores);
     if(!metric.col.name %in% colnames(signs.data) || !signs.col.name %in% colnames(signs.data)){
-      stop("Metric or sign column name not found in signs data");
-    }
+        stop("Metric or sign column name not found in signs data");
+        }
     if(!setequal(signs.data[,"Metric"], colnames(zscores))) {
-      stop("The column names of zscores must contain the same set of elements as the metric column of signs data");
-    }
+        stop("The column names of zscores must contain the same set of elements as the metric column of signs data");
+        }
     if(!all(signs.data[,signs.col.name] %in% c('pos', 'neg'))){
-      stop("Incorrect sign specification in signs column");
-    }
+        stop("Incorrect sign specification in signs column");
+        }
 
     negative.zscores <- signs.data[[metric.col.name]]['neg' == signs.data[[signs.col.name]]];
 

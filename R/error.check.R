@@ -22,13 +22,11 @@ zscore.format.check <- function(zscores) {
 
     # Missing data
     if(any(is.na(zscores))){
-        stop("Current version of OmicsQC does not support missing data")
+        stop("Current version of OmicsQC does not support missing data");
         }
 
     return(NULL);
     }
-    
-
 
 #' Test if a dataframe is the valid output of accumulate.zscores
 #'

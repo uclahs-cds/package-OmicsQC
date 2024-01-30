@@ -54,7 +54,7 @@ get.qc.heatmap <- function(
     zscore.format.check(zscores);
     accumulate.zscores.output.check(quality.scores);
     if(!setequal(rownames(zscores), as.character(quality.scores[,"Sample"]))){
-        stop("quality.scores-Sample and zscores-rownames do not contain the same elements")
+        stop("quality.scores-Sample and zscores-rownames do not contain the same elements");
         }
 
     heatmap <- BoutrosLab.plotting.general::create.heatmap(
