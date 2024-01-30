@@ -13,7 +13,7 @@ cosine.similarity.iterative(
 )
 }
 \arguments{
-\item{quality.scores}{The output of accumulate.zscores}
+\item{quality.scores}{A dataframe with columns 'Sum' (of scores) and 'Sample', i.e. the output of accumulate.zscores}
 
 \item{no.simulations}{The number of datasets to simulate}
 

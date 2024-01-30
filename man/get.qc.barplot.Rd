@@ -21,7 +21,7 @@ get.qc.barplot(
 )
 }
 \arguments{
-\item{quality.scores}{A dataframe with columns 'Sum' (of scores) and 'Sample'}
+\item{quality.scores}{A dataframe with columns 'Sum' (of scores) and 'Sample', i.e. the output of accumulate.zscores}
 
 \item{filename}{Filename for tiff output, or if NULL returns the trellis object itself}
 

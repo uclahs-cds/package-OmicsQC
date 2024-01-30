@@ -30,9 +30,9 @@ get.qc.heatmap(
 )
 }
 \arguments{
-\item{zscores}{A dataframe of (sign-corrected) z-scores for each sample and test metric}
+\item{zscores}{A dataframe of (sign-corrected) z-scores for each sample and test metric, i.e. the output of correct.zscore.signs}
 
-\item{quality.scores}{A dataframe with columns 'Sum' (of scores) and 'Sample'}
+\item{quality.scores}{A dataframe with columns 'Sum' (of scores) and 'Sample', i.e. the output of accumulate.zscores}
 
 \item{yaxis.lab}{A vector of metric labels for the y-axis; defaults to column names of z-scores}
 
