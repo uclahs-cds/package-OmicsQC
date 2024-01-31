@@ -1,20 +1,15 @@
 ---
-name: R-CMD-check
-
-on:
-   - push
-   - pull_request
-
+name: R-CMD-check (r-lib)
+'on':
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
 jobs:
-   R-CMD-check:
-      runs-on: ubuntu-latest
-
-      container:
-         image: blcdsdockerregistry/bl-r-devel:latest
-
-      steps:
-         - uses: actions/checkout@v2
-           with:
-              path: omicsQC
-         - run: R CMD build --compact-vignettes="gs+qpdf" omicsQC
-         - run: R CMD check --as-cran --run-donttest omicsQC*.tar.gz
+  R-CMD-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: r-lib/actions/setup-tinytex@v2
+      - uses: uclahs-cds/tool-R-CMD-check-action@stable
