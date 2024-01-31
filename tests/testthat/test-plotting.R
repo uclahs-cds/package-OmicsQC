@@ -22,19 +22,19 @@ signs <- data.frame(
 
 # Data Processing
 zscores <- zscores.from.metrics(scores);
-corrected_zscores <- correct.zscore.signs(
+corrected.zscores <- correct.zscore.signs(
   zscores = zscores,
   signs.data = signs,
   metric.col.name = 'Metric',
   signs.col.name = 'Sign'
 );
-accumulated_scores <- accumulate.zscores(corrected_zscores);
+accumulated.scores <- accumulate.zscores(corrected.zscores);
 
 test_that('get.qc.barplot', {
 
   # Correct input
   expect_error(
-    get.qc.barplot(accumulated_scores),
+    get.qc.barplot(accumulated.scores),
     NA
   );
 
@@ -44,10 +44,10 @@ test_that('get.qc.barplot', {
   );
 
   # Incorrect specification
-  incorrect_specification <- accumulated_scores;
-  incorrect_specification$Sample <- 1:nrow(incorrect_specification);
+  incorrect.specification <- accumulated.scores;
+  incorrect.specification$Sample <- 1:nrow(incorrect.specification);
   expect_error(
-    get.qc.barplot(incorrect_specification)
+    get.qc.barplot(incorrect.specification)
   );
 
 });
@@ -57,59 +57,59 @@ test_that('get.qc.heatmap', {
   # Correct input
   expect_error(
     get.qc.heatmap(
-      zscores = corrected_zscores,
-      quality.scores = accumulated_scores
+      zscores = corrected.zscores,
+      quality.scores = accumulated.scores
     ),
     NA
   );
 
   # zscores - no sample id's
-  no_id_zscores <- corrected_zscores;
-  rownames(no_id_zscores) <- NULL;
+  no.id.zscores <- corrected.zscores;
+  rownames(no.id.zscores) <- NULL;
   expect_error(
     get.qc.heatmap(
-      zscores = no_id_zscores,
-      quality.scores = accumulated_scores
+      zscores = no.id.zscores,
+      quality.scores = accumulated.scores
     )
   );
 
-  # accumulated_scores - wrong column names
-  incorrect_accumulated_scores <- accumulated_scores;
-  colnames(incorrect_accumulated_scores) <- c('A', 'B');
+  # accumulated.scores - wrong column names
+  incorrect.accumulated.scores <- accumulated.scores;
+  colnames(incorrect.accumulated.scores) <- c('A', 'B');
   expect_error(
     get.qc.heatmap(
-      zscores = corrected_zscores,
-      quality.scores = incorrect_accumulated_scores
+      zscores = corrected.zscores,
+      quality.scores = incorrect.accumulated.scores
     )
   );
 
-  # accumulated_scores - sample order (factor/character)
-  character_samples <- accumulated_scores;
-  character_samples$Sample <- as.character(character_samples$Sample);
+  # accumulated.scores - sample order (factor/character)
+  character.samples <- accumulated.scores;
+  character.samples$Sample <- as.character(character.samples$Sample);
   expect_error(
     get.qc.heatmap(
-      zscores = corrected_zscores,
-      quality.scores = character_samples
+      zscores = corrected.zscores,
+      quality.scores = character.samples
     ),
     NA
   );
 
-  # mismatched samples in accumulated_scores/zscores
-  missing_samples_zscores <- corrected_zscores[1:50,];
+  # mismatched samples in accumulated.scores/zscores
+  missing.samples.zscores <- corrected.zscores[1:50,];
   expect_error(
     get.qc.heatmap(
-      zscores = missing_samples_zscores,
-      quality.scores = accumulated_scores
+      zscores = missing.samples.zscores,
+      quality.scores = accumulated.scores
     )
   );
 
   # missing data in zscores
-  missing_data_zscores <- corrected_zscores;
+  missing.data.zscores <- corrected.zscores;
   zscores[1,1] <- NA;
   expect_error(
     get.qc.heatmap(
-      zscores = missing_data_zscores,
-      quality.scores = accumulated_scores
+      zscores = missing.data.zscores,
+      quality.scores = accumulated.scores
     ),
     NA
   );
@@ -119,8 +119,8 @@ test_that('get.qc.heatmap', {
 test_that('get.qc.multipanelplot', {
 
   # Correct input
-  bp <- get.qc.barplot(accumulated_scores);
-  hm <- get.qc.heatmap(zscores = corrected_zscores, quality.scores = accumulated_scores);
+  bp <- get.qc.barplot(accumulated.scores);
+  hm <- get.qc.heatmap(zscores = corrected.zscores, quality.scores = accumulated.scores);
   expect_error(
     get.qc.multipanelplot(barplot = bp, heatmap = hm),
     NA

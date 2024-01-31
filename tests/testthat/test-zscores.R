@@ -27,17 +27,17 @@ signs <- data.frame(
 );
 
 # Corrected signs
-correct_signs <- zscores;
-correct_signs[,'B'] <- -correct_signs[,'B'];
-correct_signs[correct_signs > 0 ] <- 0;
+correct.signs <- zscores;
+correct.signs[,'B'] <- -correct.signs[,'B'];
+correct.signs[correct.signs > 0 ] <- 0;
 
 # Accumulated zscores
-accumulated_scores <- data.frame(
-  'Sample' = rownames(correct_signs),
-  'Sum' = rowSums(correct_signs)
+accumulated.scores <- data.frame(
+  'Sample' = rownames(correct.signs),
+  'Sum' = rowSums(correct.signs)
 );
-accumulated_scores <- accumulated_scores[order(accumulated_scores$Sum, decreasing = T),];
-accumulated_scores$Sample <- factor(accumulated_scores$Sample, levels = accumulated_scores$Sample);
+accumulated.scores <- accumulated.scores[order(accumulated.scores$Sum, decreasing = T),];
+accumulated.scores$Sample <- factor(accumulated.scores$Sample, levels = accumulated.scores$Sample);
 
 test_that('zscore.from.metrics', {
 
@@ -46,10 +46,10 @@ test_that('zscore.from.metrics', {
   expect_equal(res, zscores);
 
   # NA in Input
-  na_scores <- scores;
-  na_scores[1,1] <- NA;
+  na.scores <- scores;
+  na.scores[1,1] <- NA;
   expect_error(
-    zscores.from.metrics(na_scores)
+    zscores.from.metrics(na.scores)
   );
 
   # Non-dataframe input
@@ -76,14 +76,14 @@ test_that('correct.zscore.signs', {
     metric.col.name = 'Metric',
     signs.col.name = 'Sign'
   );
-  expect_equal(res, correct_signs);
+  expect_equal(res, correct.signs);
 
   # Missing columns
-  missing_columns <- signs[1:2,];
+  missing.columns <- signs[1:2,];
   expect_error(
     correct.zscore.signs(
       zscores = zscores,
-      signs.data = missing_columns,
+      signs.data = missing.columns,
       metric.col.name = 'Metric',
       signs.col.name = 'Sign'
     )
@@ -100,22 +100,22 @@ test_that('correct.zscore.signs', {
   );
 
   # Extra columns
-  extra_columns <- rbind(signs, data.frame('Metric' = 'K', 'Sign' = 'pos'));
+  extra.columns <- rbind(signs, data.frame('Metric' = 'K', 'Sign' = 'pos'));
   expect_error(
     correct.zscore.signs(
       zscores = zscores,
-      signs.data = extra_columns,
+      signs.data = extra.columns,
       metric.col.name = 'Metric',
       signs.col.name = 'Sign'
     )
   );
 
   # Incorrect specification of 'pos' and 'neg'
-  incorrect_specification <- cbind(signs, 'Incorrect' = c('+', '-', '+'));
+  incorrect.specification <- cbind(signs, 'Incorrect' = c('+', '-', '+'));
   expect_error(
     correct.zscore.signs(
       zscores = zscores,
-      signs.data = incorrect_specification,
+      signs.data = incorrect.specification,
       metric.col.name = 'Metric',
       signs.col.name = 'Incorrect'
     )
@@ -126,24 +126,24 @@ test_that('correct.zscore.signs', {
 test_that('accumulate.zscores', {
 
   # Expected calculation of accumulation of z-scores
-  res <- accumulate.zscores(zscores.corrected = correct_signs);
-  expect_equal(res, accumulated_scores);
+  res <- accumulate.zscores(zscores.corrected = correct.signs);
+  expect_equal(res, accumulated.scores);
 
   # Missing sample names?
-  missing_sample_names <- correct_signs;
-  rownames(missing_sample_names) <- NULL;
+  missing.sample.names <- correct.signs;
+  rownames(missing.sample.names) <- NULL;
   expect_error(
     accumulate.zscores(
-      zscores.corrected = missing_sample_names
+      zscores.corrected = missing.sample.names
     )
   );
 
   # NA data - currently does not support missing data
   # Need to be fixed in future iterations
-  na_zscores <- correct_signs;
-  na_zscores[1,1] <- NA;
+  na.zscores <- correct.signs;
+  na.zscores[1,1] <- NA;
   expect_error(
-    accumulate.zscores(na_zscores)
+    accumulate.zscores(na.zscores)
   );
 
 });

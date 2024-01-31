@@ -8,11 +8,11 @@ data('sign.correction')
 
 # Data processing
 zscores <- zscores.from.metrics(qc.data = example.qc.dataframe);
-corrected_zscores <- correct.zscore.signs(
+corrected.zscores <- correct.zscore.signs(
   zscores = zscores,
   signs.data = sign.correction
 );
-accumulated_scores <- accumulate.zscores(zscores.corrected = corrected_zscores);
+accumulated.scores <- accumulate.zscores(zscores.corrected = corrected.zscores);
 
 # Distributions
 distributions <- c('lnorm', 'weibull', 'norm', 'gamma', 'exp', 'cauchy', 'logis');
@@ -23,7 +23,7 @@ test_that('cosine.similarity.cutoff', {
   for (distr in distributions) {
     expect_error(
       cosine.similarity.cutoff(
-        quality.scores = accumulated_scores,
+        quality.scores = accumulated.scores,
         no.simulations = 20,
         distribution = distr,
         trim.factor = 0.05,
@@ -35,7 +35,7 @@ test_that('cosine.similarity.cutoff', {
 
   # Test output format
   res <- cosine.similarity.cutoff(
-    quality.scores = accumulated_scores,
+    quality.scores = accumulated.scores,
     no.simulations = 100,
     distribution = 'norm',
     trim.factor = 0.05,
@@ -63,7 +63,7 @@ test_that('cosine.similarity.cutoff', {
   # Incorrect number of simulations
   expect_error(
     cosine.similarity.cutoff(
-      quality.scores = accumulated_scores,
+      quality.scores = accumulated.scores,
       no.simulations = 0,
       distribution = 'norm',
       trim.factor = 0.05,
@@ -74,7 +74,7 @@ test_that('cosine.similarity.cutoff', {
   # Incorrect trim factor
   expect_error(
     cosine.similarity.cutoff(
-      quality.scores = accumulated_scores,
+      quality.scores = accumulated.scores,
       no.simulations = 10,
       distribution = 'norm',
       trim.factor = 0.5,
@@ -84,7 +84,7 @@ test_that('cosine.similarity.cutoff', {
 
   expect_error(
     cosine.similarity.cutoff(
-      quality.scores = accumulated_scores,
+      quality.scores = accumulated.scores,
       no.simulations = 10,
       distribution = 'norm',
       trim.factor = 0,
@@ -95,7 +95,7 @@ test_that('cosine.similarity.cutoff', {
   # Incorrect alpha
   expect_error(
     cosine.similarity.cutoff(
-      quality.scores = accumulated_scores,
+      quality.scores = accumulated.scores,
       no.simulations = 10,
       distribution = 'norm',
       trim.factor = 0.1,
@@ -105,7 +105,7 @@ test_that('cosine.similarity.cutoff', {
 
   expect_error(
     cosine.similarity.cutoff(
-      quality.scores = accumulated_scores,
+      quality.scores = accumulated.scores,
       no.simulations = 10,
       distribution = 'norm',
       trim.factor = 0.1,
@@ -121,7 +121,7 @@ test_that('cosine.similarity.iterative', {
   for (distr in distributions) {
     expect_error(
       cosine.similarity.iterative(
-        quality.scores = accumulated_scores,
+        quality.scores = accumulated.scores,
         no.simulations = 20,
         distribution = distr,
         trim.factor = 0.05,
@@ -133,7 +133,7 @@ test_that('cosine.similarity.iterative', {
 
   # Test output format
   res <- cosine.similarity.iterative(
-    quality.scores = accumulated_scores,
+    quality.scores = accumulated.scores,
     no.simulations = 100,
     distribution = 'norm',
     trim.factor = 0.05,
@@ -159,7 +159,7 @@ test_that('cosine.similarity.iterative', {
   # Incorrect number of simulations
   expect_error(
     cosine.similarity.iterative(
-      quality.scores = accumulated_scores,
+      quality.scores = accumulated.scores,
       no.simulations = 0,
       distribution = 'norm',
       trim.factor = 0.05,
@@ -170,7 +170,7 @@ test_that('cosine.similarity.iterative', {
   # Incorrect trim factor
   expect_error(
     cosine.similarity.iterative(
-      quality.scores = accumulated_scores,
+      quality.scores = accumulated.scores,
       no.simulations = 10,
       distribution = 'norm',
       trim.factor = 0.5,
@@ -180,7 +180,7 @@ test_that('cosine.similarity.iterative', {
 
   expect_error(
     cosine.similarity.iterative(
-      quality.scores = accumulated_scores,
+      quality.scores = accumulated.scores,
       no.simulations = 10,
       distribution = 'norm',
       trim.factor = 0,
@@ -191,7 +191,7 @@ test_that('cosine.similarity.iterative', {
   # Incorrect alpha
   expect_error(
     cosine.similarity.iterative(
-      quality.scores = accumulated_scores,
+      quality.scores = accumulated.scores,
       no.simulations = 10,
       distribution = 'norm',
       trim.factor = 0.1,
@@ -201,7 +201,7 @@ test_that('cosine.similarity.iterative', {
 
   expect_error(
     cosine.similarity.iterative(
-      quality.scores = accumulated_scores,
+      quality.scores = accumulated.scores,
       no.simulations = 10,
       distribution = 'norm',
       trim.factor = 0.1,

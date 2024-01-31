@@ -19,13 +19,13 @@ signs <- data.frame(
 
 # Data Processing
 zscores <- zscores.from.metrics(scores);
-corrected_zscores <- correct.zscore.signs(
+corrected.zscores <- correct.zscore.signs(
   zscores = zscores,
   signs.data = signs,
   metric.col.name = 'Metric',
   signs.col.name = 'Sign'
 );
-accumulated_scores <- accumulate.zscores(corrected_zscores);
+accumulated.zscores <- accumulate.zscores(corrected.zscores);
 
 # Tests
 test_that('fit.and.evaluate', {
@@ -34,7 +34,7 @@ test_that('fit.and.evaluate', {
   # weibull, gamma, exp, lnorm can only accept positive values
   # todo: fix this
   res <- fit.and.evaluate(
-    quality.scores = accumulated_scores,
+    quality.scores = accumulated.zscores,
     distributions = c('norm', 'cauchy', 'logis'),
     trim.factor = 0.05
   );
@@ -58,7 +58,7 @@ test_that('fit.and.evaluate', {
   # Bad trim factor
   expect_error(
     fit.and.evaluate(
-      quality.scores = accumulated_scores,
+      quality.scores = accumulated.zscores,
       distributions = c('weibull', 'norm', 'gamma', 'exp', 'lnorm', 'cauchy', 'logis'),
       trim.factor = 0.9
     )
@@ -67,28 +67,28 @@ test_that('fit.and.evaluate', {
   # No data left after trimming
   expect_error(
     fit.and.evaluate(
-      quality.scores = accumulated_scores,
+      quality.scores = accumulated.zscores,
       distributions = c('weibull', 'norm', 'gamma', 'exp', 'lnorm', 'cauchy', 'logis'),
       trim.factor = 0.5
     )
   );
 
   # Bad input
-  bad_input <- accumulated_scores;
-  bad_input$Sum <- sample(LETTERS, size = nrow(bad_input), replace = T);
+  bad.input <- accumulated.zscores;
+  bad.input$Sum <- sample(LETTERS, size = nrow(bad.input), replace = T);
   expect_error(
     fit.and.evaluate(
-      quality.scores = bad_input,
+      quality.scores = bad.input,
       distributions = c('norm'),
       trim.factor = 0.05
     )
   );
 
-  bad_input <- accumulated_scores;
-  colnames(bad_input)[colnames(bad_input) == 'Sum'] <- 'XX';
+  bad.input <- accumulated.zscores;
+  colnames(bad.input)[colnames(bad.input) == 'Sum'] <- 'XX';
   expect_error(
     fit.and.evaluate(
-      quality.scores = bad_input,
+      quality.scores = bad.input,
       distributions = c('norm'),
       trim.factor = 0.05
     )
@@ -97,7 +97,7 @@ test_that('fit.and.evaluate', {
   # Incorrect distributions
   expect_error(
     fit.and.evaluate(
-      quality.scores = accumulated_scores,
+      quality.scores = accumulated.zscores,
       distributions = c('Norm'),
       trim.factor = 0.05
     )
