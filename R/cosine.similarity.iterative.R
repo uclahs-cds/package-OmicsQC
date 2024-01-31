@@ -127,8 +127,8 @@ cosine.similarity.iterative <- function(
         }
 
     results <- list(
-        "no.outliers" = no.outliers,
-        "outlier.labels" = outlier.labels
+        'no.outliers' = no.outliers,
+        'outlier.labels' = outlier.labels
         );
 
     return(results);

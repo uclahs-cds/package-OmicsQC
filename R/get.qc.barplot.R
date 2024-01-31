@@ -40,7 +40,7 @@ get.qc.barplot <- function(
     ) {
 
     # Error checking
-    accumulate.zscores.output.check(quality.scores); 
+    accumulate.zscores.output.check(quality.scores);
 
     barplot <- BoutrosLab.plotting.general::create.barplot(
         filename = filename,

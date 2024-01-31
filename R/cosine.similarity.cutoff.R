@@ -100,9 +100,9 @@ cosine.similarity.cutoff <- function(
 
     # Returning results
     results <- list(
-        "cutoff" = cutoff,
-        "no.outliers" = no.outliers,
-        "outlier.labels" = as.character(quality.scores$Sample[-quality.scores$Sum > cutoff])
+        'cutoff' = cutoff,
+        'no.outliers' = no.outliers,
+        'outlier.labels' = as.character(quality.scores$Sample[-quality.scores$Sum > cutoff])
         );
 
     return(results);

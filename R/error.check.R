@@ -12,17 +12,17 @@ zscore.format.check <- function(zscores) {
         }
 
     # Column names and row names
-    if(is.null(rownames(zscores))){
-        stop("Please specify sample IDs by setting the rownames");
+    if (is.null(rownames(zscores))) {
+        stop('Please specify sample IDs by setting the rownames');
         }
 
-    if(is.null(colnames(zscores))){
-        stop("Please specify metrics by setting the colnames");
+    if (is.null(colnames(zscores))) {
+        stop('Please specify metrics by setting the colnames');
         }
 
     # Missing data
-    if(any(is.na(zscores))){
-        stop("Current version of OmicsQC does not support missing data");
+    if (any(is.na(zscores))) {
+        stop('Current version of OmicsQC does not support missing data');
         }
 
     return(NULL);
@@ -36,20 +36,20 @@ accumulate.zscores.output.check <- function(quality.scores) {
 
     stopifnot(is.data.frame(quality.scores))
 
-    if(!("Sum" %in% colnames(quality.scores)) || !("Sample" %in% colnames(quality.scores))){
-        stop("quality.scores must be a data.frame that contains the columns Sum and Sample");
+    if (!('Sum' %in% colnames(quality.scores)) || !('Sample' %in% colnames(quality.scores))) {
+        stop('quality.scores must be a data.frame that contains the columns Sum and Sample');
         }
 
-    if(!is.numeric(quality.scores[,"Sum"])){
-        stop("The column Sum in quality.scores must be numeric");
+    if (!is.numeric(quality.scores[,'Sum'])) {
+        stop('The column Sum in quality.scores must be numeric');
         }
 
-    if(!is.character(quality.scores[,"Sample"]) && !is.factor(quality.scores[,"Sample"])){
-        stop("Sample ids must be character or factor");
+    if (!is.character(quality.scores[,'Sample']) && !is.factor(quality.scores[,'Sample'])) {
+        stop('Sample ids must be character or factor');
         }
 
-    if(length(quality.scores[,"Sample"]) != length(unique(quality.scores[,"Sample"]))){
-        stop("Sample ids must be unique");
+    if (length(quality.scores[,'Sample']) != length(unique(quality.scores[,'Sample']))) {
+        stop('Sample ids must be unique');
         }
 
     return(NULL);
@@ -59,10 +59,10 @@ accumulate.zscores.output.check <- function(quality.scores) {
 #'
 #' @param trim.factor The trim.factor one wants to test
 #' @noRd
-check.valid.trim.factor <- function(trim.factor){
+check.valid.trim.factor <- function(trim.factor) {
 
-    if(!is.numeric(trim.factor) || (trim.factor <= 0) || (trim.factor >= 0.5)) {
-        stop("trim.factor must be a numeric in the range of [0, 0.5]");
+    if (!is.numeric(trim.factor) || (trim.factor <= 0) || (trim.factor >= 0.5)) {
+        stop('trim.factor must be a numeric in the range of [0, 0.5]');
         }
 
     return(NULL);
@@ -73,10 +73,10 @@ check.valid.trim.factor <- function(trim.factor){
 #'
 #' @param alpha.significant The alpha.significant one wants to test
 #' @noRd
-check.valid.alpha.significant <- function(alpha.significant){
+check.valid.alpha.significant <- function(alpha.significant) {
 
-      if(!is.numeric(alpha.significant) || (alpha.significant <= 0) || (alpha.significant >= 1)) {
-          stop("alpha.significant must be a numeric in the range of [0, 1]");
+      if (!is.numeric(alpha.significant) || (alpha.significant <= 0) || (alpha.significant >= 1)) {
+          stop('alpha.significant must be a numeric in the range of [0, 1]');
           }
 
       return(NULL);
@@ -86,10 +86,10 @@ check.valid.alpha.significant <- function(alpha.significant){
 #'
 #' @param no.simulations The no.simulations one wants to test
 #' @noRd
-check.valid.no.simulations <- function(no.simulations){
+check.valid.no.simulations <- function(no.simulations) {
 
-    if(!is.numeric(no.simulations) || !(no.simulations > 0)){
-        stop("no.simulations must be a positive number");
+    if (!is.numeric(no.simulations) || !(no.simulations > 0)) {
+        stop('no.simulations must be a positive number');
         }
 
     return(NULL);

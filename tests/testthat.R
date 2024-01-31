@@ -1,3 +1,3 @@
 library(testthat);
 
-test_check("OmicsQC")
+test_check('OmicsQC')

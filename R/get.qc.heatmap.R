@@ -29,7 +29,7 @@ get.qc.heatmap <- function(
     zscores,
     quality.scores,
     yaxis.lab = colnames(zscores),
-    xaxis.lab = quality.scores[,"Sample"],
+    xaxis.lab = quality.scores[,'Sample'],
     filename = NULL,
     yaxis.cex = 0.8,
     xaxis.cex = 0,
@@ -53,13 +53,13 @@ get.qc.heatmap <- function(
     # Error checking
     zscore.format.check(zscores);
     accumulate.zscores.output.check(quality.scores);
-    if(!setequal(rownames(zscores), as.character(quality.scores[,"Sample"]))){
-        stop("quality.scores-Sample and zscores-rownames do not contain the same elements");
+    if (!setequal(rownames(zscores), as.character(quality.scores[,'Sample']))) {
+        stop('quality.scores-Sample and zscores-rownames do not contain the same elements');
         }
 
     heatmap <- BoutrosLab.plotting.general::create.heatmap(
         filename = filename,
-        x = t(zscores[as.character(quality.scores[,"Sample"]),]),
+        x = t(zscores[as.character(quality.scores[,'Sample']),]),
         # Axes labels
         yaxis.lab = yaxis.lab,
         yaxis.cex = yaxis.cex,
