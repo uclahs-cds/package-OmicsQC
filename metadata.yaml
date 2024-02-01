@@ -4,5 +4,5 @@ Description: 'OmicsQC: A method for aggregation of QC metrics and nomination of 
 Maintainers: ['ahfrelin@g.ucla.edu', 'helen.zhu@mail.utoronto.ca']
 Contributors: ['Anders Hugo Frelin', 'Helen Zhu']
 Languages: 'R'
-Dependencies: ['fitdistrplus', 'lsa', 'BoutrosLab.plotting.general', 'knitr', 'rmarkdown', 'kableExtra', 'test_that']
+Dependencies: ['fitdistrplus', 'lsa', 'BoutrosLab.plotting.general', 'knitr', 'rmarkdown', 'kableExtra', 'dplyr', 'test_that']
 References: ''  # is the tool/dependencies published, is there a confluence page
