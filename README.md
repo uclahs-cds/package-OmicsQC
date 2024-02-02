@@ -2,15 +2,14 @@
 
 1. [Description](#description)
 2. [Installation](#installation)
-3. [Quick start](#quick-start)
-4. [Resources](#resources)
-5. [Getting help](#getting-help)
-6. [Citation information](#citation-information)
-7. [License](#license)
+3. [Resources](#resources)
+4. [Getting help](#getting-help)
+5. [Citation information](#citation-information)
+6. [License](#license)
 
 ## Description
 
-OmicsQC is a statistical framework for integrating quality control metrics from multi-sample experiments such as those investigated in large cohort-level genomic profiling studies. Metrics are aggregated into quality scores which can be used to nominate samples for exclusion.
+OmicsQC is a statistical framework for integrating quality control metrics from multi-sample experiments such as cohort-level genomic profiling studies. Metrics are aggregated into quality scores which can be used to nominate samples for exclusion.
 
 ![overview plot](vignettes/omicsQCFlowchart.png)
 
@@ -19,98 +18,19 @@ OmicsQC is a statistical framework for integrating quality control metrics from 
 Using devtools in R:
 ```R
 library(devtools);
-install_github('https://github.com/uclahs-cds/package-omicsQC');
+install_github('https://github.com/uclahs-cds/package-OmicsQC');
 ```
 
 From source:
 ```shell script
-git clone https://github.com/uclahs-cds/package-omicsQC.git
-R CMD INSTALL package-omicsQC
-```
-
-## Quick start
-
-```R
-
-library(OmicsQC)
-
-### Retrieving Data ###
-
-# QC metrics
-data('example.qc.dataframe')
-
-# Directionality of the data
-data('sign.correction')
-
-### Calculating Z-scores ###
-zscores = zscores.from.metrics(
-  qc.data = example.qc.dataframe,
-  filename = NULL
-)
-
-### Sign correction ###
-corrected_zscores = correct.zscore.signs(
-  zscores = zscores,
-  signs.data = sign.correction,
-  metric.col.name = "Metric",
-  signs.col.name = "Sign",
-  filename = NULL
-)
-
-### Summing up Z-scores ###
-cum_zscores = accumulate.zscores(
-  zscores.corrected = corrected_zscores,
-  filename = NULL
-)
-
-### Fitting distribution ###
-fit.results <- fit.and.evaluate(
-  quality.scores = cum_zscores,
-  trim.factor = 0.15
-)
-
-### Identifying outliers using `cosine similarity iterative` ###
-outlier.detect.iterative.res <- cosine.similarity.iterative(
-  quality.scores = cum_zscores,
-  distribution = 'lnorm',
-  no.simulations = 1000,
-  trim.factor = 0.15,
-  alpha.significant = 0.05
-)
-
-### Identifying outliers using `cosine similarity cutoff` ###
-outlier.detect.cutoff.res <- cosine.similarity.cutoff(
-  quality.scores = cum_zscores,
-  distribution = 'lnorm',
-  no.simulations = 1000,
-  trim.factor = 0.15,
-  alpha.significant = 0.05
-)
-
-### Plotting ###
-
-# Barplot
-bp = get.qc.barplot(
-  quality.scores = cum_zscores
-)
-
-# Heatmap
-hm = get.qc.heatmap(
-  zscores = corrected_zscores,
-  ylabels = ylabels
-)
-
-# Combining plots using multipanelplot
-mp_plt = get.qc.multipanelplot(
-  barplot = bp,
-  heatmap = hm,
-  # filename = "~/Desktop/mp_plot.pdf"
-)
-
+git clone https://github.com/uclahs-cds/package-OmicsQC.git
+R CMD INSTALL package-OmicsQC
 ```
 
 ## Resources
-* [Vignette]()
+* For a tutorial on how to use OmicsQC, check out our [Vignette](https://uclahs-cds.github.io/package-OmicsQC/docs/articles/Intro_to_omicsQC.html)!
+* For detailed information about available functions, check out our [Function Reference](https://uclahs-cds.github.io/package-OmicsQC/docs/reference/index.html)!
+* For updates, check out our [Changelog](https://github.com/uclahs-cds/package-OmicsQC/blob/main/CHANGELOG.md)!
 
 ## Getting help
 
@@ -121,7 +41,7 @@ Looking for guidance or support with OmicsQC? Look no further.
 
 ## Citation information
 
-<Include BioRxiv preprint>
+You have stumbled upon an unpublished software :shushing_face: :shushing_face: :shushing_face:. We are currently preparing the manuscript for HistogramZoo. Please befriend us to learn more or check back later for updated citation information.
 
 ## License
 
