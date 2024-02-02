@@ -88,7 +88,7 @@ cosine.similarity.cutoff <- function(
 
     # Calculating quantiles of cosine similarity and
     # determining threshold of cosine similarity required to achieve significance
-    alpha.cutoff.cos.sim <- quantile::quantile(
+    alpha.cutoff.cos.sim <- stats::quantile(
         x = cos.similarity.nulldist,
         prob = c(alpha.significant)
         );
