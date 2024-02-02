@@ -17,6 +17,10 @@ accumulated.scores <- accumulate.zscores(zscores.corrected = corrected.zscores);
 # Distributions
 distributions <- c('lnorm', 'weibull', 'norm', 'gamma', 'exp', 'cauchy', 'logis');
 
+# Setting seed to acquire reproducible test results
+# todo: fix this in the future with built-in seed
+set.seed(314);
+
 test_that('cosine.similarity.cutoff', {
 
   # Test that this function works for all distributions
