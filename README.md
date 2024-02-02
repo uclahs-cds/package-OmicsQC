@@ -11,7 +11,7 @@
 
 OmicsQC is a statistical framework for integrating quality control metrics from multi-sample experiments such as cohort-level genomic profiling studies. Metrics are aggregated into quality scores which can be used to nominate samples for exclusion.
 
-![overview plot](vignettes/omicsQCFlowchart.png)
+![Created with BioRender.com](man/figures/OmicsQC-flowchart.png)
 
 ## Installation
 
@@ -22,7 +22,7 @@ install_github('https://github.com/uclahs-cds/package-OmicsQC');
 ```
 
 From source:
-```shell script
+```shell
 git clone https://github.com/uclahs-cds/package-OmicsQC.git
 R CMD INSTALL package-OmicsQC
 ```
@@ -30,7 +30,7 @@ R CMD INSTALL package-OmicsQC
 ## Resources
 * For a tutorial on how to use OmicsQC, check out our [Vignette](https://uclahs-cds.github.io/package-OmicsQC/docs/articles/Intro_to_omicsQC.html)!
 * For detailed information about available functions, check out our [Function Reference](https://uclahs-cds.github.io/package-OmicsQC/docs/reference/index.html)!
-* For updates, check out our [Changelog](https://github.com/uclahs-cds/package-OmicsQC/blob/main/CHANGELOG.md)!
+* For updates, check out our [Changelog](https://uclahs-cds.github.io/package-OmicsQC/news/index.html)!
 
 ## Getting help
 
@@ -41,7 +41,7 @@ Looking for guidance or support with OmicsQC? Look no further.
 
 ## Citation information
 
-You have stumbled upon an unpublished software :shushing_face: :shushing_face: :shushing_face:. We are currently preparing the manuscript for HistogramZoo. Please befriend us to learn more or check back later for updated citation information.
+You have stumbled upon an unpublished software :shushing_face: :shushing_face: :shushing_face:. We are currently preparing the manuscript for OmicsQC. Please befriend us to learn more or check back later for updated citation information.
 
 ## License
 
