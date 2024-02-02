@@ -44,7 +44,7 @@ cosine.similarity.cutoff <- function(
 
     # Fitting distribution and extracting parameters
     fit <- fitdistrplus::fitdist(-quality.scores.trimmed$Sum, distribution);
-    p <- ppoints(-quality.scores$Sum);
+    p <- stats::ppoints(-quality.scores$Sum);
     args <- as.list(fit$estimate);
     args.q <- c(args, list('p' = p));
     args.r <- c(args, list('n' = no.samples));
@@ -75,7 +75,7 @@ cosine.similarity.cutoff <- function(
     # Comparing each simulated dataset to the theoretical
     # quantile set using cosine similarity
     for (i in 1:no.simulations) {
-        simulated.data.quantile <- quantile(
+        simulated.data.quantile <- stats::quantile(
             x = simulated.distributions[i, ],
             prob = p
             );
@@ -88,7 +88,7 @@ cosine.similarity.cutoff <- function(
 
     # Calculating quantiles of cosine similarity and
     # determining threshold of cosine similarity required to achieve significance
-    alpha.cutoff.cos.sim <- quantile(
+    alpha.cutoff.cos.sim <- quantile::quantile(
         x = cos.similarity.nulldist,
         prob = c(alpha.significant)
         );

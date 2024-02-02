@@ -1,6 +1,6 @@
 Package: OmicsQC
 Type: Package
-Title: A QC aggregating package for genomic data
+Title: A statistical framework for integrating quality control metrics from multi-sample experiments.
 Version: 0.1.0
 Authors@R:
     c(
@@ -22,6 +22,8 @@ Description: A unbiased method to aggregate QC metrics from multi-sample experim
 Depends:
     R (>= 2.10)
 Imports:
+    stats,
+    utils,
     fitdistrplus,
     lsa,
     BoutrosLab.plotting.general

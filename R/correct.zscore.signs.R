@@ -41,7 +41,7 @@ correct.zscore.signs <- function(
     zscores[0 < zscores] <- 0;
 
     if (!is.null(filename)) {
-        write.table(
+        utils::write.table(
             x = zscores,
             file = filename,
             quote = FALSE,

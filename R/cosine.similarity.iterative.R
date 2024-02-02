@@ -55,13 +55,13 @@ cosine.similarity.iterative <- function(
         # Fitting distribution and extracting parameters
         fit <- fitdistrplus::fitdist(observed.data.trimmed$Sum, distribution);
 
-        p <- ppoints(observed.data$Sum);
+        p <- stats::ppoints(observed.data$Sum);
         args <- as.list(fit$estimate);
         args.q <- c(args, list('p' = p));
         args.r <- c(args, list('n' = no.samples));
 
         # Quantiles of observed data
-        observed.data.quantile <- quantile(
+        observed.data.quantile <- stats::quantile(
             x = observed.data$Sum,
             prob = p
             );
@@ -99,7 +99,7 @@ cosine.similarity.iterative <- function(
         # Calculating the cosine similarity between the max simulated data point quantile
         # and the max theoretical quantile
         for (i in 1:no.simulations) {
-            simulated.data.quantile <- quantile(
+            simulated.data.quantile <- stats::quantile(
                 x = simulated.distributions[i, ],
                 prob = p
                 );

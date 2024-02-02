@@ -28,7 +28,7 @@ accumulate.zscores <- function(zscores.corrected, filename = NULL) {
         );
 
     if (!is.null(filename)) {
-        write.table(
+        utils::write.table(
             x = quality.scores.df,
             file = filename,
             quote = FALSE,

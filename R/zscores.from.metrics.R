@@ -16,7 +16,7 @@ zscores.from.metrics <- function(qc.data, filename = NULL) {
     rownames(zscores) <- row.names(qc.data);
 
     if (!is.null(filename)) {
-        write.table(
+        utils::write.table(
             x = zscores,
             file = filename,
             quote = FALSE,
