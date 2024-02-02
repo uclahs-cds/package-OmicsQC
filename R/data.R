@@ -18,7 +18,7 @@
 #'   qc.data = example.qc.dataframe
 #'   );
 #' }
-NULL
+NULL;
 
 #' Directionality of QC metrics
 #'
@@ -48,7 +48,7 @@ NULL
 #'   signs.col.name = 'Sign',
 #'   );
 #' }
-NULL
+NULL;
 
 #' Formatted QC metrics labels
 #'
@@ -68,7 +68,6 @@ NULL
 #' data(ylabels)
 #' data(example.qc.dataframe)
 #' data(sign.correction)
-#' 
 #' zscores <- zscores.from.metrics(qc.data = example.qc.dataframe);
 #' zscores.corrected <- correct.zscore.signs(
 #'   zscores = zscores,
@@ -77,11 +76,10 @@ NULL
 #'   signs.col.name = 'Sign'
 #' );
 #' quality.scores <- accumulate.zscores(zscores.corrected = zscores.corrected);
-#' 
 #' qc.heatmap <- get.qc.heatmap(
 #'   zscores = zscores.corrected,
 #'   quality.scores = quality.scores,
 #'   yaxis.lab = ylabels
 #' );
 #' }
-NULL
+NULL;

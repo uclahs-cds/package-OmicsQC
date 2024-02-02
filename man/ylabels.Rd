@@ -18,7 +18,6 @@ Formatted QC metrics labels
 data(ylabels)
 data(example.qc.dataframe)
 data(sign.correction)
-
 zscores <- zscores.from.metrics(qc.data = example.qc.dataframe);
 zscores.corrected <- correct.zscore.signs(
   zscores = zscores,
@@ -27,7 +26,6 @@ zscores.corrected <- correct.zscore.signs(
   signs.col.name = 'Sign'
 );
 quality.scores <- accumulate.zscores(zscores.corrected = zscores.corrected);
-
 qc.heatmap <- get.qc.heatmap(
   zscores = zscores.corrected,
   quality.scores = quality.scores,
