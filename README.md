@@ -28,8 +28,8 @@ R CMD INSTALL package-OmicsQC
 ```
 
 ## Resources
-* For a tutorial on how to use OmicsQC, check out our [Vignette](https://uclahs-cds.github.io/package-OmicsQC/docs/articles/Intro_to_omicsQC.html)!
-* For detailed information about available functions, check out our [Function Reference](https://uclahs-cds.github.io/package-OmicsQC/docs/reference/index.html)!
+* For a tutorial on how to use OmicsQC, check out our [Vignette](https://uclahs-cds.github.io/package-OmicsQC/articles/Intro_to_omicsQC.html)!
+* For detailed information about available functions, check out our [Function Reference](https://uclahs-cds.github.io/package-OmicsQC/reference/index.html)!
 * For updates, check out our [Changelog](https://uclahs-cds.github.io/package-OmicsQC/news/index.html)!
 
 ## Getting help
