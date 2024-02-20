@@ -81,7 +81,7 @@ test_that('cosine.similarity.cutoff', {
       quality.scores = accumulated.scores,
       no.simulations = 10,
       distribution = 'norm',
-      trim.factor = 0.5,
+      trim.factor = 0.51,
       alpha.significant = 0.1
     )
   );
@@ -91,7 +91,7 @@ test_that('cosine.similarity.cutoff', {
       quality.scores = accumulated.scores,
       no.simulations = 10,
       distribution = 'norm',
-      trim.factor = 0,
+      trim.factor = -0.1,
       alpha.significant = 0.1
     )
   );
@@ -103,7 +103,7 @@ test_that('cosine.similarity.cutoff', {
       no.simulations = 10,
       distribution = 'norm',
       trim.factor = 0.1,
-      alpha.significant = 0
+      alpha.significant = -0.1
     )
   );
 
@@ -113,7 +113,7 @@ test_that('cosine.similarity.cutoff', {
       no.simulations = 10,
       distribution = 'norm',
       trim.factor = 0.1,
-      alpha.significant = 1
+      alpha.significant = 1.1
     )
   );
 
@@ -177,7 +177,7 @@ test_that('cosine.similarity.iterative', {
       quality.scores = accumulated.scores,
       no.simulations = 10,
       distribution = 'norm',
-      trim.factor = 0.5,
+      trim.factor = 0.51,
       alpha.significant = 0.1
     )
   );
@@ -187,7 +187,7 @@ test_that('cosine.similarity.iterative', {
       quality.scores = accumulated.scores,
       no.simulations = 10,
       distribution = 'norm',
-      trim.factor = 0,
+      trim.factor = -0.1,
       alpha.significant = 0.1
     )
   );
@@ -199,7 +199,7 @@ test_that('cosine.similarity.iterative', {
       no.simulations = 10,
       distribution = 'norm',
       trim.factor = 0.1,
-      alpha.significant = 0
+      alpha.significant = -0.1
     )
   );
 
@@ -209,7 +209,7 @@ test_that('cosine.similarity.iterative', {
       no.simulations = 10,
       distribution = 'norm',
       trim.factor = 0.1,
-      alpha.significant = 1
+      alpha.significant = 1.1
     )
   );
 
