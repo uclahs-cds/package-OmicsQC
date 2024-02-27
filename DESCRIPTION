@@ -1,20 +1,20 @@
 Package: OmicsQC
 Type: Package
 Title: A QC aggregating package for genomic data
-Version: 0.1.0
+Version: 1.1.0
 Authors@R:
     c(
     person(given = "Anders Hugo",
            family = "Frelin",
            email = "ahfrelin@g.ucla.edu",
-           role = c("aut", "cre")),
+           role = c("aut")),
     person(given = "Helen",
            family = "Zhu",
            role = c("aut"),
            email = "helen.zhu@mail.utoronto.ca"),
     person(given = "Paul C.",
            family = "Boutros",
-           role = c("aut"),
+           role = c("aut", "cre"),
            email = "PBoutros@mednet.ucla.edu",
            comment = c(ORCID = "0000-0003-0553-7520"))
     )
