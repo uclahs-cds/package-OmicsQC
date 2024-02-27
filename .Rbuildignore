@@ -6,3 +6,5 @@
 ^pkgdown$
 ^doc$
 ^Meta$
+LICENSE.md
+metadata.yaml
