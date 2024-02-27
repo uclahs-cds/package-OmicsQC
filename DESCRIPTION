@@ -1,6 +1,6 @@
 Package: OmicsQC
 Type: Package
-Title: A QC aggregating package for genomic data
+Title: Nominating quality control outliers in genomic profiling studies
 Version: 1.1.0
 Authors@R:
     c(
@@ -18,7 +18,7 @@ Authors@R:
            email = "PBoutros@mednet.ucla.edu",
            comment = c(ORCID = "0000-0003-0553-7520"))
     )
-Description: OmicsQC is a method that aggregates QC metrics from multi-sample experiments and performs outlier nomination.
+Description: OmicsQC is a method that aggregates quality control metrics from multi-sample genomic experiments and performs outlier nomination.
 Depends:
     R (>= 2.10)
 Imports:
