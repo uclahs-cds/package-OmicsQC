@@ -8,6 +8,9 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ---
 
 ## [Unreleased]
+
+## [1.1.0] - 2024-02-27
+
 ### Changed
 - Updated boundary conditions for the parameters `alpha.significant` to [0, 1] and `trim.factor` to [0, 0.5]
 
