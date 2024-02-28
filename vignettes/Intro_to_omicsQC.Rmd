@@ -184,7 +184,7 @@ print(outlier.detect.cutoff.res$outlier.labels);
 ```
 
 # Data visualisation
-The third aspect of the package is the visualization of the quality control data. Several functions have been adapted from the package [BoutrosLab.plotting.general](https://cran.r-project.org/web/packages/BoutrosLab.plotting.general/BoutrosLab.plotting.general.pdf) and customized for the purposes of this package. These functions offer standardized plots with flexibility for customization to aid in data visualization.
+The third aspect of the package is the visualization of the quality control data. Several functions have been adapted from the package [BoutrosLab.plotting.general](https://CRAN.R-project.org/package=BoutrosLab.plotting.general) and customized for the purposes of this package. These functions offer standardized plots with flexibility for customization to aid in data visualization.
 
 ### Quality score barplot
 The function `get.qc.barplot` takes the accumulated quality scores (`quality.scores`) and returns a barplot displaying the scores from lowest to highest. It can also optionally depict a cut-off for outlier nomination. If filename is not NULL, it is saved to file. Otherwise, the trellis object is returned.
