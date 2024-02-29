@@ -17,6 +17,14 @@ fit.and.evaluate(
 
 \item{trim.factor}{The fraction of extremes on each end to trim before fitting}
 }
+\value{
+A dataframe of the results with the following columns
+\describe{
+\item{distribution}{Name of the fitted distribution}
+\item{KS.rejected}{Whether the Kolmogorov-Smirnov test rejects the fit; see \code{fitdistrplus::gofstat} - kstest}
+\item{BIC.value}{Bayesian Information Criterion}
+}
+}
 \description{
 This function takes the accumulated QC scores, a vector of distributions
 and a trimming factor. It then returns the results for each distribution

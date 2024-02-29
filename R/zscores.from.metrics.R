@@ -5,7 +5,7 @@
 #'
 #' @param qc.data A dataframe whose rows are samples and each column a QC metric
 #' @param filename A filename where to save data. If NULL data will not be saved to file
-#' @return A dataframe of z-scores for each metric
+#' @return A dataframe of z-scores; rows correspond to samples and columns correspond to metrics from `qc.data`
 #' @export
 zscores.from.metrics <- function(qc.data, filename = NULL) {
 

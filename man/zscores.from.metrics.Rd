@@ -12,7 +12,7 @@ zscores.from.metrics(qc.data, filename = NULL)
 \item{filename}{A filename where to save data. If NULL data will not be saved to file}
 }
 \value{
-A dataframe of z-scores for each metric
+A dataframe of z-scores; rows correspond to samples and columns correspond to metrics from \code{qc.data}
 }
 \description{
 This function takes a dataframe of QC metrics, and calculates the

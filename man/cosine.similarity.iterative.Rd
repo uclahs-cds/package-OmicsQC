@@ -23,6 +23,13 @@ cosine.similarity.iterative(
 
 \item{alpha.significant}{Alpha value for significance}
 }
+\value{
+Results in the form of a named list
+\describe{
+\item{no.outliers}{Number of nominated outliers}
+\item{outlier.labels}{Outlier IDs, corresponding to \code{Sample} column of \code{quality.scores}}
+}
+}
 \description{
 This function takes quality.scores, trims it and fits it to the distribution given.
 It then iteratively tests the largest datapoint compared a null distribution of size

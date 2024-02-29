@@ -5,7 +5,12 @@
 #'
 #' @param zscores.corrected A dataframe whose rows are samples and each column a QC metric
 #' @param filename A filename where to save data. If NULL data will not be saved to file
-#' @return A dataframe of z-scores for each metric
+#' @return A dataframe of aggregated z-scores for each sample
+#' \describe{
+#'    \item{Sample}{Sample IDs defined by the rownames of `zscores.corrected`}
+#'    \item{Sum}{Sum of z-scores}
+#' }
+#' 
 #' @export
 accumulate.zscores <- function(zscores.corrected, filename = NULL) {
 

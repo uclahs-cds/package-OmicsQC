@@ -18,6 +18,12 @@
 #' @param trim.factor What fraction of values of each to trim to get parameters without using extremes
 #' @param alpha.significant Alpha value for significance
 #' @param distribution A distribution to test, will default to 'lnorm'
+#' @return Results in the form of a named list
+#' \describe{
+#'    \item{cutoff}{Computed cutoff for aggregated z-scores used as a threshold for nominating outliers}
+#'    \item{no.outliers}{Number of nominated outliers}
+#'    \item{outlier.labels}{Outlier IDs, corresponding to `Sample` column of `quality.scores`}
+#' }
 #' @export
 cosine.similarity.cutoff <- function(
     quality.scores,

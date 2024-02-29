@@ -12,7 +12,11 @@ accumulate.zscores(zscores.corrected, filename = NULL)
 \item{filename}{A filename where to save data. If NULL data will not be saved to file}
 }
 \value{
-A dataframe of z-scores for each metric
+A dataframe of aggregated z-scores for each sample
+\describe{
+\item{Sample}{Sample IDs defined by the rownames of \code{zscores.corrected}}
+\item{Sum}{Sum of z-scores}
+}
 }
 \description{
 This function takes a dataframe of all the sign corrected scores, thus all negative, and aggregates
