@@ -14,12 +14,12 @@
 #' @param quality.scores The accumulated QC scores, the output of accumulate.zscores
 #' @param distributions A vector of distributions to fit and test
 #' @param trim.factor The fraction of extremes on each end to trim before fitting
-#' 
+#'
 #' @return A dataframe of the results with the following columns
 #' \describe{
 #'    \item{distribution}{Name of the fitted distribution}
 #'    \item{KS.rejected}{Whether the Kolmogorov-Smirnov test rejects the fit; see `fitdistrplus::gofstat` - kstest}
-#'    \item{BIC.value}{Bayesian Information Criterion} 
+#'    \item{BIC.value}{Bayesian Information Criterion}
 #' }
 #'
 #' @export

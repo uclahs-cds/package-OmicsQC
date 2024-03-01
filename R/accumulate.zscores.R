@@ -10,7 +10,7 @@
 #'    \item{Sample}{Sample IDs defined by the rownames of `zscores.corrected`}
 #'    \item{Sum}{Sum of z-scores}
 #' }
-#' 
+#'
 #' @export
 accumulate.zscores <- function(zscores.corrected, filename = NULL) {
 
