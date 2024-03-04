@@ -15,6 +15,12 @@ OmicsQC is a statistical framework for integrating quality control metrics from 
 
 ## Installation
 
+From CRAN:
+```R
+install.packages('OmicsQC');
+library(OmicsQC)
+```
+
 Using devtools in R:
 ```R
 library(devtools);
@@ -45,7 +51,7 @@ You have stumbled upon an unpublished software :shushing_face: :shushing_face: :
 
 ## License
 
-Authors: Hugo Anders Frelin, Paul C. Boutros (PBoutros@mednet.ucla.edu)
+Authors: Hugo Anders Frelin, Helen Zhu, Paul C. Boutros (PBoutros@mednet.ucla.edu)
 
 OmicsQC is licensed under the GNU General Public License version 2. See the file LICENSE.md for the terms of the GNU GPL license.
 
